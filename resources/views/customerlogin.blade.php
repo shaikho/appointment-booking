@@ -400,6 +400,7 @@
                     @endif
                      <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="Username*" class="username"/>
                      <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="E-mail" class="username"/>
+                     <input style="margin-left:16%" id="phone" name="phone" type="number" required placeholder="Phone number" class="username"/>
                      <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="Password*" class="username"/>
                      <h1 class="signup1" style="font-size: 20px">Age</h1>
                      <div class="range-slider" style="margin-left:15%;margin-top:8% ">

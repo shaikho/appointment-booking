@@ -1,7 +1,7 @@
 <?php
 
 Route::redirect('/', '/login');
-Route::redirect('/home', '/admin');
+Route::redirect('/home', '/admin')->name('home');
 Auth::routes(['register' => false]);
 // Route::post('customerlogout',function(){
 //     return view('customerlogin');
@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
+
     Route::post('register','UsersController@register')->name('register');
 
     // Services
@@ -38,9 +39,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
+    Route::get('draftedappointments','AppointmentsController@draftedappointments')->name('pendingappointments');
     Route::get('pendingappointments','AppointmentsController@pendingappointments')->name('pendingappointments');
     Route::get('approvedappointments','AppointmentsController@approvedappointments')->name('approvedappointments');
-    Route::post('decline','AppointmentsController@decline')->name('decline');
+    Route::post('approve/{id}','AppointmentsController@approve')->name('approve');
+    Route::post('decline/{id}','AppointmentsController@decline')->name('decline');
 
     // Calender
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');

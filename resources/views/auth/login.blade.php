@@ -29,6 +29,7 @@
             .container{
                 display:none;
                 position:absolute;
+
                 width: auto;
                 height:auto;
                 top: calc(50% - 240px);
@@ -337,10 +338,11 @@
                     </div>
                     @endif
                      <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="Username*" class="username"/>
-                     <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="E-mail" class="username"/>
+                     <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="E-mail*" class="username"/>
+                     <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="Phone number*" class="username"/>
                      <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="Password*" class="username"/>
-                     <h1 class="signup1" style="font-size: 20px">Age</h1>
-                     <div class="range-slider" style="margin-left:15%;margin-top:8% ">
+                     <h1 class="signup1" style="font-size: 20px;margin-top:-2%">Age</h1>
+                     <div class="range-slider" style="margin-left:15%;margin-top:-2% ">
                         <input id="age" name="age" class="range-slider__range" type="range" value="100" min="0" max="100"/>
                         <span class="range-slider__value" style="margin-left:80%;margin-top:-7%">0</span>
                       </div>

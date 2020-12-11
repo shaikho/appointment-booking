@@ -32,12 +32,16 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
                 return view('partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'approveGate',
+                    'declineGate',
                     'crudRoutePart',
                     'row'
                 ));
@@ -78,10 +82,23 @@ class AppointmentsController extends Controller
         return view('admin.appointments.index');
     }
 
-    public function pendingappointments(Request $request)
+    public function draftedappointments(Request $request)
     {
         if ($request->ajax()) {
-            $query = Appointment::with(['client', 'employee', 'services'])->select(sprintf('%s.*', (new Appointment)->table))->where('status','P')->get();
+            if(Session::get('role') == '2'){
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('client_id','=',Session::get('user_id'))
+                ->where('status','D')
+                ->get();
+            }else{
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('status','D')
+                ->get();
+            }
+
+
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -91,12 +108,92 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
                 return view('partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'approveGate',
+                    'declineGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->addColumn('employee_name', function ($row) {
+                return $row->employee ? $row->employee->name : '';
+            });
+
+            $table->editColumn('price', function ($row) {
+                return $row->price ? $row->price : "";
+            });
+            $table->editColumn('comments', function ($row) {
+                return $row->comments ? $row->comments : "";
+            });
+            $table->editColumn('services', function ($row) {
+                $labels = [];
+
+                foreach ($row->services as $service) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $service->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'employee', 'services']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.appointments.approvedappointments');
+    }
+
+    public function pendingappointments(Request $request)
+    {
+        if ($request->ajax()) {
+            if(Session::get('role') == '2'){
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('client_id','=',Session::get('user_id'))
+                ->where('status','P')
+                ->get();
+            }else{
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('status','P')
+                ->get();
+            }
+
+
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'appointment_show';
+                $editGate      = 'appointment_edit';
+                $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
+                $crudRoutePart = 'appointments';
+
+                return view('partials.datatablesAppointmentsActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'approveGate',
+                    'declineGate',
                     'crudRoutePart',
                     'row'
                 ));
@@ -140,7 +237,20 @@ class AppointmentsController extends Controller
     public function approvedappointments(Request $request)
     {
         if ($request->ajax()) {
-            $query = Appointment::with(['client', 'employee', 'services'])->select(sprintf('%s.*', (new Appointment)->table))->where('status','A')->get();
+            if(Session::get('role') == '2'){
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('client_id','=',Session::get('user_id'))
+                ->where('status','A')
+                ->get();
+            }else{
+                $query = Appointment::with(['client', 'employee', 'services'])
+                ->select(sprintf('%s.*', (new Appointment)->table))
+                ->where('status','A')
+                ->get();
+            }
+
+
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -150,12 +260,16 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
                 return view('partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'approveGate',
+                    'declineGate',
                     'crudRoutePart',
                     'row'
                 ));
@@ -196,10 +310,18 @@ class AppointmentsController extends Controller
         return view('admin.appointments.approvedappointments');
     }
 
-    public function decline($id){
+    public function approve($id){
         $appointment = Appointment::find($id);
         $appointment->status = 'A';
         $appointment->save();
+        return view('admin.appointments.pendingappointments');
+    }
+
+    public function decline($id){
+        $appointment = Appointment::find($id);
+        $appointment->status = 'D';
+        $appointment->save();
+        return view('admin.appointments.pendingappointments');
     }
 
     public function create()
@@ -220,7 +342,7 @@ class AppointmentsController extends Controller
         $appointment = Appointment::create($request->all());
         $appointment->services()->sync($request->input('services', []));
 
-        return redirect()->route('admin.appointments.index');
+        return redirect()->route('admin.pendingappointments');
     }
 
     public function edit(Appointment $appointment)

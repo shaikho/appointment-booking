@@ -59,12 +59,13 @@ class UsersController extends Controller
         $validatedrequest = $request->validate([
             'email' => 'unique:users'
         ]);
-        
+
         $user = new User;
         $user->name = $request->name;
         $user->age = $request->age;
         $user->gender = $request->gender;
         $user->email = $request->email;
+        $user->phone = $request->phone;
         $user->password = bcrypt($request->password);
 
         if($user->save()){
@@ -87,7 +88,7 @@ class UsersController extends Controller
 
         Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
 
-        return redirect()->route('customerlogin');
+        return redirect()->route('login');
     }
 
     public function verifyemail($id){
@@ -97,7 +98,7 @@ class UsersController extends Controller
         $user->email_verified_at = $datetimenow->toDateTimeString();
         $user->save();
         Session::put('emailverification', 'Success!');
-        return redirect()->route('customerlogin');
+        return redirect()->route('login');
     }
 
     public function edit(User $user)
@@ -108,15 +109,24 @@ class UsersController extends Controller
 
         $user->load('roles');
 
+
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
-        $user->roles()->sync($request->input('roles', []));
+        if(Session::get('role') == '2'){
+            $user->roles = ["2"];
+        }else{
+            $user->roles()->sync($request->input('roles', []));
+        }
 
-        return redirect()->route('admin.users.index');
+        if(Session::get('role') == '2'){
+            return redirect()->route('home');
+        }else{
+            return redirect()->route('admin.users.index');
+        }
     }
 
     public function show(User $user)

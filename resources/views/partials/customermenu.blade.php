@@ -227,7 +227,11 @@
 
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li class=""><a href="{{ route("admin.home") }}">Home</a></li>
+          <li class="">
+
+              <a href="{{ route("admin.home") }}">
+                <i class="nav-icon fa-fw fas fa-home"></i>
+                {{ trans('global.home') }}</a></li>
           <li class="{{ request()->is('admin/system-calendar') || request()->is('admin/system-calendar/*') ? 'active' : '' }}"><a href="{{ route("admin.systemCalendar") }}">
             <i class="nav-icon fa-fw fas fa-calendar">
             </i>
@@ -238,25 +242,28 @@
                 {{ trans('cruds.appointment.title') }} <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown" id="blog">
-              <li><a href="{{ route("admin.pendingappointments") }}">{{ trans('cruds.pending_appointment.menu_title') }}</a></li>
+              <li><a href="{{ route("admin.pendingappointments") }}"> <i class="nav-icon fa-fw fas fa-hourglass-start"></i> {{ trans('cruds.pending_appointment.menu_title') }}</a></li>
               <li class="separator"></li>
-              <li><a href="{{ route("admin.approvedappointments") }}">{{ trans('cruds.approved_appointment.menu_title') }}</a></li>
+              <li><a href="{{ route("admin.approvedappointments") }}"> <i class="nav-icon fa-fw fas fa-check-circle"></i> {{ trans('cruds.approved_appointment.menu_title') }}</a></li>
             </ul>
           </li>
           @can('service_access')
             <li class="navbar-dropdown {{ request()->is('admin/services') || request()->is('admin/services/*') ? 'active' : '' }}">
-                <a href="{{ route("admin.services.index") }}">{{ trans('cruds.service.title') }}</a></li>
+                <a href="{{ route("admin.services.index") }}"><i class="nav-icon fa-fw fas fa-list-alt"></i>  {{ trans('cruds.service.title') }}</a></li>
           @endcan
           @can('employee_access')
-            <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route("admin.employees.index") }}">{{ trans('cruds.employee.title') }}</a></li>
+            <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route("admin.employees.index") }}"> <i class="nav-icon fa-fw fas fa-users"></i>  {{ trans('cruds.employee.title') }}</a></li>
           @endcan
-          <li><a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">Logout</a></li>
+          <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route('admin.users.edit',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
+          <li><a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+            <i class="nav-icon fa-fw fas fa fa-sign-out"></i>
+            Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
-
   <script>
+
     // Updated: 23-4-2020
     // I've moved the old navbar `pen` to: https://codepen.io/themustafaomar/pen/YzyNQXV
     // Since it was old and coded badly this is a new one build with pure Javascript

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAppointmentStatusToAppointmentsTable extends Migration
+class AddPhoneToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddAppointmentStatusToAppointmentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->string('status')->nullable()->after('price')->default('D');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone')->nullable()->after('email');
         });
     }
 
@@ -25,8 +25,8 @@ class AddAppointmentStatusToAppointmentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('appointments', function (Blueprint $table) {
-            $table->drop('status');
+        Schema::table('users', function (Blueprint $table) {
+            $table->drop('phone');
         });
     }
 }
