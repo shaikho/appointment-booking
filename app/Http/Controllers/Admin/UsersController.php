@@ -21,6 +21,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Mail;
 use Carbon;
+use App\Appointment;
 
 class UsersController extends Controller
 {
@@ -154,8 +155,12 @@ class UsersController extends Controller
 
         $user->load('roles');
 
+        // $appointments = Appointment::All()->where('client_id','=',$user->id)->get();
+        // $appointments = Appointment::with(['client', 'employee', 'services'])->where('client_id','=',$user->id)->get();
+        // return $appointments;
 
-        return view('admin.users.edit', compact('roles', 'user'));
+
+        return view('admin.users.edit', compact('roles', 'user','appointments'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -169,7 +174,7 @@ class UsersController extends Controller
 
         if(Session::get('role') == '2'){
             Session::put('profileupdated','updated');
-            return redirect()->route('home');
+            return redirect()->route('admin.users.show',$user->id);
         }else{
             return redirect()->route('admin.users.index');
         }

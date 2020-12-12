@@ -258,7 +258,7 @@
           @can('employee_access')
             <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route("admin.employees.index") }}"> <i class="nav-icon fa-fw fas fa-users"></i>  {{ trans('cruds.employee.title') }}</a></li>
           @endcan
-          <li class="navbar-dropdown {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}"><a href="{{ route('admin.users.edit',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
+          <li class="navbar-dropdown {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}"><a href="{{ route('admin.users.show',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
           <li><a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
             <i class="nav-icon fa-fw fas fa fa-sign-out"></i>
             Logout</a></li>

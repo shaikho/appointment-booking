@@ -145,4 +145,15 @@ Swal.fire(
 {{Session::forget('datelimitfail')}}
 @endif
 
+@if (Session::has('hourslimitviolated'))
+<script>
+Swal.fire(
+    'Failed!',
+    'Sorry your appointment violates appointment hours limitaion, please update your appointment accordingly',
+    'error'
+)
+</script>
+{{Session::forget('hourslimitviolated')}}
+@endif
+
 @endsection

@@ -334,13 +334,15 @@ class AppointmentsController extends Controller
         //get specific appointment
         $appointment = Appointment::find($id);
 
-        $d1 = Carbon::parse($appointment->start_date);
-        $d2 = Carbon::parse($appointment->end_date);
-        return $d2;
-        $diff = $d1->diff($d2);
-        return $diff->h;
+        $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $appointment->finish_time);
+        $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $appointment->start_time);
+        $appointmenthours = $to->diffInHours($from);
 
-        //get all appointments to compare their dates
+        if($appointmenthours > $durationlimit){
+            Session::put('hourslimitviolated','Hours limit violated');
+            return view('admin.appointments.draftedappointments');
+        }
+
         $completeappointments = Appointment::All()->where('status','<>','D');
         foreach ($completeappointments as $singleappointment){
             $date = $singleappointment->start_time->format('Y/m/d');
@@ -359,7 +361,7 @@ class AppointmentsController extends Controller
             Session::put('datelimitfail','Sorry picked date ('.$datetocompare.') is fully booked.');
         }
 
-        return view('admin.appointments.draftedappointments',compact('message'));
+        return view('admin.appointments.draftedappointments');
     }
 
     public function approve($id){

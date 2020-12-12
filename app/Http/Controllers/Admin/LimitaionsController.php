@@ -21,6 +21,7 @@ class LimitaionsController extends Controller
     }
 
     public function update(Request $request){
+        return $request;
         $limitaion = Limitaion::find($request->id);
         $limitaion->limit = $request->limit;
         $limitaion->save();

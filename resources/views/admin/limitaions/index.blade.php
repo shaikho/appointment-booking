@@ -1,5 +1,6 @@
 @extends(Session::get('role') == '2' ? 'layouts.customer' : 'layouts.admin')
 @section('content')
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.limiations.title_singular') }} {{ trans('global.list') }}
