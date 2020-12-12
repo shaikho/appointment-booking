@@ -7,6 +7,17 @@
         </div>
     </div>
 </div>
+
+@if (Session::has('profileupdated'))
+<script>
+Swal.fire(
+    'Success!',
+    'Profile updated.',
+    'success'
+)
+</script>
+{{Session::forget('profileupdated')}}
+@endif
 @endsection
 @section('scripts')
 @parent

@@ -212,7 +212,7 @@
     }
   </style>
 
-<nav class="navbar" style="background-color: #e6e1e1;background-image:url('images/lined-paper.png');">
+<nav class="navbar" style="background-color: #e6e1e1;background-image:url({{asset("/assets/images/lined-paper.png")}})">
     <div class="container">
       <div class="navbar-header">
         <button class="navbar-toggler" data-toggle="open-navbar1">
@@ -239,12 +239,16 @@
         </a></li>
           <li class="navbar-dropdown {{ request()->is('admin/pendingappointments') || request()->is('admin/approvedappointments') ? 'active' : '' }}">
             <a href="#" class="dropdown-toggler" data-dropdown="blog">
+                <i class="nav-icon fa-fw fas fa-calendar-minus-o">
+                </i>
                 {{ trans('cruds.appointment.title') }} <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown" id="blog">
-              <li><a href="{{ route("admin.pendingappointments") }}"> <i class="nav-icon fa-fw fas fa-hourglass-start"></i> {{ trans('cruds.pending_appointment.menu_title') }}</a></li>
+                <li><a href="{{ route("admin.draftedappointments") }}"> <i class="nav-icon fa-fw fas fa-edit"></i>&nbsp;{{ trans('cruds.drafted_appointment.menu_title') }}</a></li>
+                <li class="separator"></li>
+              <li><a href="{{ route("admin.pendingappointments") }}"> <i class="nav-icon fa-fw fas fa-hourglass-start"></i>&nbsp;{{ trans('cruds.pending_appointment.menu_title') }}</a></li>
               <li class="separator"></li>
-              <li><a href="{{ route("admin.approvedappointments") }}"> <i class="nav-icon fa-fw fas fa-check-circle"></i> {{ trans('cruds.approved_appointment.menu_title') }}</a></li>
+              <li><a href="{{ route("admin.approvedappointments") }}"> <i class="nav-icon fa-fw fas fa-check-circle"></i>&nbsp;{{ trans('cruds.approved_appointment.menu_title') }}</a></li>
             </ul>
           </li>
           @can('service_access')
@@ -254,7 +258,7 @@
           @can('employee_access')
             <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route("admin.employees.index") }}"> <i class="nav-icon fa-fw fas fa-users"></i>  {{ trans('cruds.employee.title') }}</a></li>
           @endcan
-          <li class="navbar-dropdown {{ request()->is('admin/employees') || request()->is('admin/employees/*') ? 'active' : '' }}"><a href="{{ route('admin.users.edit',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
+          <li class="navbar-dropdown {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}"><a href="{{ route('admin.users.edit',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
           <li><a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
             <i class="nav-icon fa-fw fas fa fa-sign-out"></i>
             Logout</a></li>

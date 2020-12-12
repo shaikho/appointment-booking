@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
 use Session;
+use App\Limitaion;
+use Carbon\Carbon;
 
 class AppointmentsController extends Controller
 {
@@ -98,7 +100,6 @@ class AppointmentsController extends Controller
                 ->get();
             }
 
-
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -108,14 +109,16 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $submitGate    = 'submit_appointments';
                 $approveGate   = 'approve_appointments';
                 $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
-                return view('partials.datatablesActions', compact(
+                return view('partials.datatablesAppointmentsActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'submitGate',
                     'approveGate',
                     'declineGate',
                     'crudRoutePart',
@@ -155,7 +158,7 @@ class AppointmentsController extends Controller
             return $table->make(true);
         }
 
-        return view('admin.appointments.approvedappointments');
+        return view('admin.appointments.draftedappointments');
     }
 
     public function pendingappointments(Request $request)
@@ -184,14 +187,16 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $submitGate    = 'submit_appointments';
                 $approveGate   = 'approve_appointments';
                 $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
-                return view('partials.datatablesAppointmentsActions', compact(
+                return view('partials.datatablesActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'submitGate',
                     'approveGate',
                     'declineGate',
                     'crudRoutePart',
@@ -260,6 +265,7 @@ class AppointmentsController extends Controller
                 $viewGate      = 'appointment_show';
                 $editGate      = 'appointment_edit';
                 $deleteGate    = 'appointment_delete';
+                $submitGate    = 'submit_appointments';
                 $approveGate   = 'approve_appointments';
                 $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
@@ -268,6 +274,7 @@ class AppointmentsController extends Controller
                     'viewGate',
                     'editGate',
                     'deleteGate',
+                    'submitGate',
                     'approveGate',
                     'declineGate',
                     'crudRoutePart',
@@ -310,6 +317,51 @@ class AppointmentsController extends Controller
         return view('admin.appointments.approvedappointments');
     }
 
+    public function submit($id){
+
+        $message = 'N/A';
+        //get daily limitaion
+        $dailylimit = Limitaion::find(2);
+        $dailylimit = $dailylimit->limit;
+
+        //get duration limitaion
+        $durationlimit = Limitaion::find(3);
+        $durationlimit = $durationlimit->limit;
+
+        //to count up to day limit
+        $counter=0;
+
+        //get specific appointment
+        $appointment = Appointment::find($id);
+
+        $d1 = Carbon::parse($appointment->start_date);
+        $d2 = Carbon::parse($appointment->end_date);
+        return $d2;
+        $diff = $d1->diff($d2);
+        return $diff->h;
+
+        //get all appointments to compare their dates
+        $completeappointments = Appointment::All()->where('status','<>','D');
+        foreach ($completeappointments as $singleappointment){
+            $date = $singleappointment->start_time->format('Y/m/d');
+            if($datetocompare == $date){
+                $counter = $counter + 1;
+            }
+        }
+
+        if($counter < $dailylimit){
+            $appointment->status = 'P';
+            $appointment->save();
+            $message = 'Appointment submitted.';
+            Session::put('success','Appointment submitted.');
+        }else{
+            $message = 'Sorry picked date ('.$datetocompare.') is fully booked.';
+            Session::put('datelimitfail','Sorry picked date ('.$datetocompare.') is fully booked.');
+        }
+
+        return view('admin.appointments.draftedappointments',compact('message'));
+    }
+
     public function approve($id){
         $appointment = Appointment::find($id);
         $appointment->status = 'A';
@@ -340,8 +392,15 @@ class AppointmentsController extends Controller
     public function store(StoreAppointmentRequest $request)
     {
         $appointment = Appointment::create($request->all());
+        if(Session::get('role') != '2'){
+            $appointment->status = 'A';
+            $appointment->save();
+        }
         $appointment->services()->sync($request->input('services', []));
 
+        if(Session::get('role') == '2'){
+            return redirect()->route('admin.draftedappointments');
+        }
         return redirect()->route('admin.pendingappointments');
     }
 
@@ -365,7 +424,11 @@ class AppointmentsController extends Controller
         $appointment->update($request->all());
         $appointment->services()->sync($request->input('services', []));
 
-        return redirect()->route('admin.appointments.index');
+        if(Session::get('role')){
+            return redirect()->route('admin.draftedappointments');
+        }else {
+            return redirect()->route('admin.appointments.index');
+        }
     }
 
     public function show(Appointment $appointment)

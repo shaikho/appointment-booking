@@ -56,6 +56,7 @@ class UsersController extends Controller
     }
 
     public function register(Request $request){
+
         $validatedrequest = $request->validate([
             'email' => 'unique:users'
         ]);
@@ -101,6 +102,50 @@ class UsersController extends Controller
         return redirect()->route('login');
     }
 
+    public function resetpassword(Request $request){
+
+        $validatedrequest = $request->validate([
+            'email' => 'required|exists:users',
+        ]);
+
+        $user = User::where('email',$request->email)->get();
+        $encrypted = Crypt::encryptString($user[0]->id);
+        $details = [
+            'title' => 'Mail from Appointment booking',
+            'body' => 'Your password reset link is here
+
+                       http://127.0.0.1:8000/changepassword/'.$encrypted
+        ];
+
+        Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+        Session::put('emailsent','sent');
+
+        return view('auth.login');
+    }
+
+    public function changepassword($id){
+
+        $decrypted = Crypt::decryptString($id);
+        $user = User::find($decrypted);
+
+        return view('changepassword',compact('user'));
+    }
+
+    public function updatepassword(Request $request){
+
+        $user = User::find($request->id);
+        $newpassword = bcrypt($request->password);
+        $user->password = $newpassword;
+
+        if($user->save()){
+            Session::put('passwordupdated','Password updated');
+        }else{
+            Session::put('somethingwentwrong','Something went wrong');
+        }
+
+        return view('auth.login');
+    }
+
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -123,6 +168,7 @@ class UsersController extends Controller
         }
 
         if(Session::get('role') == '2'){
+            Session::put('profileupdated','updated');
             return redirect()->route('home');
         }else{
             return redirect()->route('admin.users.index');

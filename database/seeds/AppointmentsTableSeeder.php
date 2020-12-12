@@ -12,5 +12,8 @@ class AppointmentsTableSeeder extends Seeder
     public function run()
     {
         \App\Appointment::factory()->count(10)->create();
+        // $appointments = [
+
+        // ];
     }
 }

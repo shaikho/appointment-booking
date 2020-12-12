@@ -50,14 +50,14 @@
                             {{ $appointment->finish_time }}
                         </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th>
                             {{ trans('cruds.appointment.fields.price') }}
                         </th>
                         <td>
                             ${{ $appointment->price }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>
                             {{ trans('cruds.appointment.fields.comments') }}

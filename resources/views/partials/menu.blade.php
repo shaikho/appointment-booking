@@ -1,4 +1,4 @@
-<div class="sidebar">
+    <div class="sidebar">
     <nav class="sidebar-nav">
 
         <ul class="nav">
@@ -83,6 +83,16 @@
                         @endcan
                     </ul>
                 </li>
+            @endcan
+            @can('limitations_management')
+            <li class="nav-item">
+                <a href="{{ route("admin.limitaions") }}" class="nav-link {{ request()->is('admin/limitations') || request()->is('admin/limitations/*') ? 'active' : '' }}">
+                    <i class="fa-fw fas fa-cogs nav-icon">
+
+                    </i>
+                    {{ trans('cruds.limiations.title') }}
+                </a>
+            </li>
             @endcan
             @can('service_access')
                 <li class="nav-item">

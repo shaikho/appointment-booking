@@ -11,7 +11,7 @@
             body {
                 background:#f5d7d9;
                 font-family: 'Roboto';
-                background-image:url('images/crisp-paper-ruffles.png');
+                background-image:url({{asset("/assets/images/crisp-paper-ruffles.png")}});
                 }
                 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                 color: #748194;
@@ -315,7 +315,7 @@
         <div class="container">
             <div class="c1">
                <div class="c11">
-                  <h1 class="mainhead">PICK YOU APPOINTMENT</h1>
+                  <h1 class="mainhead">PICK YOUR APPOINTMENT</h1>
                   <p class="mainp">Just select an empty slot and submit your appointment for approval</p>
                </div>
                <div id="left"><h1 class="s1class"><span>SIGN</span><span class="su">IN</span>
@@ -375,7 +375,7 @@
                     <input style="margin-left:16%" name="password" required type="password" placeholder="Password" class="username"/>
                     <button class="btn">Get Started</button>
                     <br><br><br><br>
-                  <a href=""><p class="signup2">Forget Password?</p></a>
+                  <a href={{ route('forgotpassword') }}><p class="signup2">Forget Password?</p></a>
                 </form>
             </div>
          </div>
@@ -448,6 +448,39 @@ $(document).ready(function(){
     });
 </script>
 {{Session::forget('success')}}
+@endif
+
+@if (Session::has('passwordupdated'))
+<script>
+Swal.fire(
+  'Password updated',
+  'Your password has been updated you can login now.',
+  'success'
+);
+</script>
+{{Session::forget('passwordupdated')}}
+@endif
+
+@if (Session::has('somethingwentwrong'))
+<script>
+Swal.fire(
+  'Failed!',
+  'Something went wrong.',
+  'fail'
+);
+</script>
+{{Session::forget('somethingwentwrong')}}
+@endif
+
+@if (Session::has('emailsent'))
+<script>
+Swal.fire(
+  'E-mail sent!',
+  'An email has been sent to your email with reset link.',
+  'info'
+);
+</script>
+{{Session::forget('emailsent')}}
 @endif
 
 @if (Session::has('emailverification'))

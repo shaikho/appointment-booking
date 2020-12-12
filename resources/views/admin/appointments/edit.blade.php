@@ -60,7 +60,7 @@
                     {{ trans('cruds.appointment.fields.finish_time_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
+            {{-- <div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
                 <label for="price">{{ trans('cruds.appointment.fields.price') }}</label>
                 <input type="number" id="price" name="price" class="form-control" value="{{ old('price', isset($appointment) ? $appointment->price : '') }}" step="0.01">
                 @if($errors->has('price'))
@@ -71,7 +71,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.appointment.fields.price_helper') }}
                 </p>
-            </div>
+            </div> --}}
             <div class="form-group {{ $errors->has('comments') ? 'has-error' : '' }}">
                 <label for="comments">{{ trans('cruds.appointment.fields.comments') }}</label>
                 <textarea id="comments" name="comments" class="form-control ">{{ old('comments', isset($appointment) ? $appointment->comments : '') }}</textarea>

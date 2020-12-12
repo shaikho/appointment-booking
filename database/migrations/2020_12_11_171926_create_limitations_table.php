@@ -15,8 +15,11 @@ class CreateLimitationsTable extends Migration
     {
         Schema::create('limitations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('limitation');
-            $table->string('limit');
+            $table->string('limitation')->nullable();
+            $table->string('limit')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

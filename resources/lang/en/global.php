@@ -11,6 +11,7 @@ return [
     'delete'                               => 'Delete',
     'cancel'                               => 'Cancel',
     'approve'                               => 'Approve',
+    'submit'                               => 'Submit',
     'decline'                               => 'Decline',
     'confirm'                               => 'Confirm',
     'decline'                               => 'Decline',

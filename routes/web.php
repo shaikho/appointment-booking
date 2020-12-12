@@ -1,6 +1,6 @@
 <?php
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/login')->name('login');
 Route::redirect('/home', '/admin')->name('home');
 Auth::routes(['register' => false]);
 // Route::post('customerlogout',function(){
@@ -39,16 +39,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
-    Route::get('draftedappointments','AppointmentsController@draftedappointments')->name('pendingappointments');
+    Route::get('draftedappointments','AppointmentsController@draftedappointments')->name('draftedappointments');
     Route::get('pendingappointments','AppointmentsController@pendingappointments')->name('pendingappointments');
     Route::get('approvedappointments','AppointmentsController@approvedappointments')->name('approvedappointments');
+    Route::post('submit/{id}','AppointmentsController@submit')->name('submit');
     Route::post('approve/{id}','AppointmentsController@approve')->name('approve');
     Route::post('decline/{id}','AppointmentsController@decline')->name('decline');
 
     // Calender
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 
-    // Custome
+    // Limitaions
+    Route::get('limitaions','LimitaionsController@index')->name('limitaions');
+    Route::get('editlimitaions/{id}','LimitaionsController@edit')->name('editlimitaions');
+    Route::put('updatelimitaions','LimitaionsController@update')->name('updatelimitaions');
 
 });
 
@@ -58,21 +62,28 @@ Route::get('customerlogin',function (){
     return view('customerlogin');
 })->name('customerlogin');
 
+Route::get('forgotpassword',function (){
+    return view('forgotpassword');
+})->name('forgotpassword');
+
 Route::group(['namespace' => 'Admin'], function () {
 
     Route::post('customerregister','UsersController@register')->name('customerregister');
+    Route::get('changepassword/{id}','UsersController@changepassword')->name('changepassword');
+    Route::post('updatepassword','UsersController@updatepassword')->name('updatepassword');
     Route::get('emailverification/{id}','UsersController@verifyemail')->name('emailverification');
+    Route::post('resetpassword','UsersController@resetpassword')->name('resetpassword');
 
 });
 
-Route::get('send-mail', function () {
+// Route::get('send-mail', function () {
 
-    $details = [
-        'title' => 'E-mail verification',
-        'body' => 'This is for testing email using smtp'
-    ];
+//     $details = [
+//         'title' => 'E-mail verification',
+//         'body' => 'This is for testing email using smtp'
+//     ];
 
-    Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+//     Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
 
-    dd("Email is Sent.");
-});
+//     dd("Email is Sent.");
+// });

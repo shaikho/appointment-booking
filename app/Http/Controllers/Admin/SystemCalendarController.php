@@ -13,18 +13,19 @@ class SystemCalendarController extends Controller
     {
         $events = [];
         $myevents = [];
+        $othersevents = [];
 
-        // if(Session::get('role') == 2){
-        //     $appointments = Appointment::with(['client', 'employee'])->where('client_id',Session::get('user_id'))->get();
-        // }else{
-        //     $appointments = Appointment::with(['client', 'employee'])->get();
-        // }
+        $myappointments = Appointment::with(['client', 'employee'])
+                                      ->where('status','<>','D')
+                                      ->where('client_id',Session::get('user_id'))
+                                      ->get();
 
-        $myappointments = Appointment::with(['client', 'employee'])->where('client_id',Session::get('user_id'))->get();
+        $othersappointments = Appointment::with(['client', 'employee'])
+                                          ->where('status','<>','D')
+                                          ->where('client_id','!=',Session::get('user_id'))
+                                          ->get();
 
-        $othersappointments = Appointment::with(['client', 'employee'])->where('client_id','!=',Session::get('user_id'))->get();
-
-
+        // return $othersappointments;
 
         if(Session::get('role') == '2'){
 
@@ -66,6 +67,8 @@ class SystemCalendarController extends Controller
                 ];
             }
         }
+
+
 
         return view('admin.calendar.calendar', compact('myevents','othersevents'));
     }

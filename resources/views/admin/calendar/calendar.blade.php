@@ -1,8 +1,8 @@
 @extends(Session::get('role') == '2' ? 'layouts.customer' : 'layouts.admin')
 @section('content')
 <style>
-    .fc-time {
-        /* font-size: 30px; */
+    .fc-sat {
+
     }
 </style>
     @can('appointment_create')
@@ -31,37 +31,24 @@
 @parent
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
-    @if(Session::get('role') == '2'){
-        <script>
-            $(document).ready(function () {
-              // page is now ready, initialize the calendar...
-              myevents ={!! json_encode($myevents) !!};
-              othersevents ={!! json_encode($othersevents) !!};
-              $('#calendar').fullCalendar({
-                  // put your options and callbacks here
-                  //   events: myevents,othersevents,
-                  eventSources: [
-                      myevents
-                      ,othersevents
-                  ],
-                  defaultView: 'agendaWeek'
-              })
-          })
-          </script>
-    }@else{
-        <script>
-            $(document).ready(function () {
-              // page is now ready, initialize the calendar...
-            //   myevents ={!! json_encode($myevents) !!};
-              othersevents ={!! json_encode($othersevents) !!};
-              $('#calendar').fullCalendar({
-                  // put your options and callbacks here
-                  events: othersevents,
-                  defaultView: 'agendaWeek'
-              })
-          })
-          </script>
-    }
-    @endif
 
+    <script>
+      $(document).ready(function () {
+        // page is now ready, initialize the calendar...
+        myevents ={!! json_encode($myevents) !!};
+        othersevents ={!! json_encode($othersevents) !!};
+        $('#calendar').fullCalendar({
+            // put your options and callbacks here
+            //   events: myevents,othersevents,
+            eventSources: [
+                myevents
+                ,othersevents
+            ],
+            // hiddenDays: [ 0,1,2,3 ],
+            // hiddenDays: [ 0,1,2,3,4,5,6,7 ],
+            // weekends:false,
+            defaultView: 'agendaWeek'
+        })
+    })
+    </script>
 @stop

@@ -8,21 +8,21 @@
         {{ trans('global.edit') }}
     </a>
 @endcan
+@can($submitGate)
+    <form action="{{ route('admin.submit', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+        <input type="hidden" name="_method" value="POST">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="submit" class="btn btn-xs btn-success" style="background-color: #4DBD74l;border-color:#4DBD74" value="{{ trans('global.submit') }}">
+    </form>
+@endcan
 @can($deleteGate)
     <form action="{{ route('admin.' . $crudRoutePart . '.destroy', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="submit" class="btn btn-xs btn-secondary" value="{{ Session::get('role') == '2' ? trans('global.cancel') : trans('global.delete') }}  ">
+        <input type="submit" class="btn btn-xs btn-danger" value="{{ Session::get('role') == '2' ? trans('global.cancel') : trans('global.delete') }}  ">
     </form>
 @endcan
-<br>
-@can($approveGate)
-    <form action="{{ route('admin.approve', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-        <input type="hidden" name="_method" value="POST">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="submit" class="btn btn-xs btn-success" style="background-color: #4DBD74l;border-color:#4DBD74" value="{{ trans('global.approve') }}">
-    </form>
-@endcan
+
 @can($approveGate)
     <form action="{{ route('admin.approve', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
         <input type="hidden" name="_method" value="POST">

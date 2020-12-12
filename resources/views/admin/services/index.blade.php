@@ -27,9 +27,9 @@
                     <th>
                         {{ trans('cruds.service.fields.name') }}
                     </th>
-                    <th>
+                    {{-- <th>
                         {{ trans('cruds.service.fields.price') }}
-                    </th>
+                    </th> --}}
                     <th>
                         &nbsp;
                     </th>
@@ -87,7 +87,7 @@
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
-{ data: 'price', name: 'price' },
+// { data: 'price', name: 'price' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
