@@ -30,6 +30,7 @@ class MailTest extends Mailable
     public function build()
     {
         return $this->subject('Appointment booking')
-                    ->view('MailTest');
+                    ->view('MailTest')
+                    ->from('alshak.diya@hotmail.com','Appointment booking');
     }
 }

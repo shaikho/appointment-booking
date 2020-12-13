@@ -13,7 +13,6 @@
     <div class="card-header">
         {{ trans('cruds.appointment.title_singular') }} {{ trans('global.list') }}
     </div>
-
     <div class="card-body">
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Appointment">
             <thead>
@@ -51,8 +50,6 @@
                 </tr>
             </thead>
         </table>
-
-
     </div>
 </div>
 @endsection
@@ -97,7 +94,7 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.appointments.index') }}",
+    ajax: "{{ route('admin.pendingappointments') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },

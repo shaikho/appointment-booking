@@ -8,12 +8,15 @@
         {{ trans('global.edit') }}
     </a>
 @endcan
+<br>
+@if(Session::get('role') == '2')
 @can($submitGate)
     <form action="{{ route('admin.submit', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
         <input type="hidden" name="_method" value="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="submit" class="btn btn-xs btn-success" style="background-color: #4DBD74l;border-color:#4DBD74" value="{{ trans('global.submit') }}">
     </form>
+@endif
 @endcan
 @can($deleteGate)
     <form action="{{ route('admin.' . $crudRoutePart . '.destroy', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">

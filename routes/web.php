@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('approvedappointments','AppointmentsController@approvedappointments')->name('approvedappointments');
     Route::post('submit/{id}','AppointmentsController@submit')->name('submit');
     Route::post('approve/{id}','AppointmentsController@approve')->name('approve');
+    Route::get('approve/{id}','AppointmentsController@approve')->name('approve');
     Route::post('decline/{id}','AppointmentsController@decline')->name('decline');
 
     // Calender
@@ -76,7 +77,6 @@ Route::group(['namespace' => 'Admin'], function () {
 
 });
 
-Route::get('qr-code', function ()
-{
-  return QRCode::text('QR Code Generator for Laravel!')->png();
+Route::get('email',function(){
+    return view('MailTest');
 });

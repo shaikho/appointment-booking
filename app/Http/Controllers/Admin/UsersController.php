@@ -83,9 +83,9 @@ class UsersController extends Controller
         $encrypted = Crypt::encryptString($user->id);
         $details = [
             'title' => 'Mail from Appointment booking',
+            'image' => 0,
             'body' => 'Verify your account by clicking the following link
-
-                       http://127.0.0.1:8000/emailverification/'.$encrypted
+            http://127.0.0.1:8000/emailverification/'.$encrypted
         ];
 
         Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
@@ -113,9 +113,9 @@ class UsersController extends Controller
         $encrypted = Crypt::encryptString($user[0]->id);
         $details = [
             'title' => 'Mail from Appointment booking',
+            'image' => 0,
             'body' => 'Your password reset link is here
-
-                       http://127.0.0.1:8000/changepassword/'.$encrypted
+            http://127.0.0.1:8000/changepassword/'.$encrypted
         ];
 
         Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));

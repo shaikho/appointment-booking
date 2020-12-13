@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Appointment;
+use App\Limitaion;
 use App\Http\Controllers\Controller;
 use Session;
 
@@ -68,8 +69,9 @@ class SystemCalendarController extends Controller
             }
         }
 
+        $limitaion = Limitaion::find(1);
+        $offdays = $limitaion->limit;
 
-
-        return view('admin.calendar.calendar', compact('myevents','othersevents'));
+        return view('admin.calendar.calendar', compact('myevents','othersevents','offdays'));
     }
 }

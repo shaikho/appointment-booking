@@ -110,4 +110,16 @@
                 });
             });
 </script>
+
+@if(Session::has('emailsenttoclient'))
+<script>
+Swal.fire(
+  'E-mail sent to client',
+  'An email has been sent to the client containing modifications.',
+  'success'
+);
+</script>
+{{Session::forget('emailsenttoclient')}}
+@endif
+
 @endsection

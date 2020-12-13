@@ -7,6 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <link href="{{ asset('assets/images/icons8-calendar-100.png') }}" rel="shortcut icon" type="image/x-icon" />
         <style>
             body {
                 background:#f5d7d9;

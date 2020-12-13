@@ -35,6 +35,8 @@
     <script>
       $(document).ready(function () {
         // page is now ready, initialize the calendar...
+        offdays = {!! json_encode($offdays) !!};
+        var array = JSON.parse(offdays);
         myevents ={!! json_encode($myevents) !!};
         othersevents ={!! json_encode($othersevents) !!};
         $('#calendar').fullCalendar({
@@ -44,7 +46,7 @@
                 myevents
                 ,othersevents
             ],
-            // hiddenDays: [ 0,1,2,3 ],
+            hiddenDays: array,
             // hiddenDays: [ 0,1,2,3,4,5,6,7 ],
             // weekends:false,
             defaultView: 'agendaWeek'
