@@ -76,14 +76,7 @@ Route::group(['namespace' => 'Admin'], function () {
 
 });
 
-// Route::get('send-mail', function () {
-
-//     $details = [
-//         'title' => 'E-mail verification',
-//         'body' => 'This is for testing email using smtp'
-//     ];
-
-//     Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
-
-//     dd("Email is Sent.");
-// });
+Route::get('qr-code', function ()
+{
+  return QRCode::text('QR Code Generator for Laravel!')->png();
+});
