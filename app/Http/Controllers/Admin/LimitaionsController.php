@@ -51,7 +51,7 @@ class LimitaionsController extends Controller
             $limitaion = Limitaion::find($request->id);
             $limitaion->limit = $request->limit;
             $limitaion->save();
-        }        
+        }
         $limitaions = Limitaion::All();
         return view('admin.limitaions.index',compact('limitaions'));
     }

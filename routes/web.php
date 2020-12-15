@@ -77,6 +77,8 @@ Route::group(['namespace' => 'Admin'], function () {
 
 });
 
-Route::get('email',function(){
-    return view('MailTest');
+Route::post('setlocal/{id}',function ($id){
+    Session::put('local',$id);
+    App::setLocale($id);
+    return view('auth.login');
 });

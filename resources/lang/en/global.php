@@ -9,6 +9,8 @@ return [
     'create'                               => 'Create',
     'dashboard'                            => 'Dashboard',
     'delete'                               => 'Delete',
+    'male'                               => 'Male',
+    'female'                               => 'Female',
     'cancel'                               => 'Cancel',
     'approve'                               => 'Approve',
     'submit'                               => 'Submit',
@@ -257,4 +259,14 @@ return [
     'no_alerts'                            => 'No alerts',
     'calendar'                             => 'Calendar',
     'messenger'                            => 'Messenger',
+
+    //
+    'pick_appointment'                     => 'PICK YOUR APPOINTMENT',
+    'pick_appointment_detail'              => 'Just select an empty slot and submit your appointment for approval',
+    'sign'                                 => 'SIGN',
+    'in'                                   => 'IN',
+    'up'                                   => 'UP',
+    'signin'                               => 'SIGN IN',
+    'signup'                               => 'SIGN UP',
+
 ];

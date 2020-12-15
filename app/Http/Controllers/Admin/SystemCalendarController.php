@@ -67,7 +67,7 @@ class SystemCalendarController extends Controller
                     'url'   => route('admin.appointments.edit', $appointment->id),
                 ];
             }
-        }
+    }
 
         $limitaion = Limitaion::find(1);
         $offdays = $limitaion->limit;

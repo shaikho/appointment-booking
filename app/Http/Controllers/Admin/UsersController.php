@@ -88,7 +88,7 @@ class UsersController extends Controller
             http://127.0.0.1:8000/emailverification/'.$encrypted
         ];
 
-        Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+        Mail::to($user->email)->send(new \App\Mail\MailTest($details));
 
         return redirect()->route('login');
     }
@@ -118,7 +118,7 @@ class UsersController extends Controller
             http://127.0.0.1:8000/changepassword/'.$encrypted
         ];
 
-        Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+        Mail::to($user[0]->email)->send(new \App\Mail\MailTest($details));
         Session::put('emailsent','sent');
 
         return view('auth.login');

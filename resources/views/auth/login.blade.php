@@ -48,7 +48,7 @@
 
             .c11{
                 background-image:url('https://i.pinimg.com/736x/b8/09/22/b80922f6ea2daaf36a6627378662803b--deck-of-cards-phone-wallpapers.jpg');
-                /* background-image: url('images/9c4575e07f6509a635c4c22d74f1dbea.jpg'); */
+                /* background-image: url('2477d4aec0f7b325f230d6260e932296.jpg'); */
                 background-size:300px 400px;
                 background-repeat: no-repeat;
                 background-color:white;
@@ -308,6 +308,7 @@
             border-bottom: 7px solid transparent;
             content: "";
         }
+
     </style>
         <title>Document</title>
     </head>
@@ -316,17 +317,17 @@
         <div class="container">
             <div class="c1">
                <div class="c11">
-                  <h1 class="mainhead">PICK YOUR APPOINTMENT</h1>
-                  <p class="mainp">Just select an empty slot and submit your appointment for approval</p>
+                  <h1 class="mainhead">{{ trans('global.pick_appointment') }}</h1>
+                  <p class="mainp">{{ trans('global.pick_appointment_detail') }}</p>
                </div>
-               <div id="left"><h1 class="s1class"><span>SIGN</span><span class="su">IN</span>
+               <div id="left"><h1 class="s1class"><span>{{ trans('global.sign') }}</span><span class="su">{{ trans('global.in') }}</span>
                </h1></div>
-               <div id="right"><h1 class="s2class"><span>SIGN</span><span class="su">UP</span></h1></div>
+               <div id="right"><h1 class="s2class"><span>{{ trans('global.sign') }}</span><span class="su">{{ trans('global.up') }}</span></h1></div>
             </div>
             <div class="c2">
                <form action="{{ route("customerregister") }}" method="POST" enctype="multipart/form-data" class="signup">
                 @csrf
-                  <h1 class="signup1">SIGN UP</h1>
+                  <h1 class="signup1">{{ trans('global.signup') }}</h1>
                   @if($errors->has('email'))
                   <div class="signup3" style="padding-bottom:5px">
                       {{ $errors->first('email') }}
@@ -338,28 +339,28 @@
                         {{ $errors->first('password') }}
                     </div>
                     @endif
-                     <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="Username*" class="username"/>
+                     <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="*" class="username"/>
                      <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="E-mail*" class="username"/>
                      <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="Phone number*" class="username"/>
                      <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="Password*" class="username"/>
-                     <h1 class="signup1" style="font-size: 20px;margin-top:-2%">Age</h1>
+                     <h1 class="signup1" style="font-size: 20px;margin-top:-2%">{{ trans('cruds.user.fields.age') }}</h1>
                      <div class="range-slider" style="margin-left:15%;margin-top:-2% ">
                         <input id="age" name="age" class="range-slider__range" type="range" value="100" min="0" max="100"/>
                         <span class="range-slider__value" style="margin-left:80%;margin-top:-7%">0</span>
                       </div>
-                     <h1 class="signup1" style="font-size: 20px">Gender</h1>
+                     <h1 class="signup1" style="font-size: 20px">{{ trans('cruds.user.fields.gender') }}</h1>
                      <div class="radio" style="margin-left: 8%">
                         <input id="radio-1" name="gender" type="radio" value="M" checked>
-                        <label for="radio-1" class="radio-label" style="color: #748194;font-weight:900" > Male</label>
+                        <label for="radio-1" class="radio-label" style="color: #748194;font-weight:900" > {{ trans('global.male') }}</label>
                         <input id="radio-2" name="gender" type="radio" value="F">
-                        <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" > Female</label>
+                        <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" >  {{ trans('global.female') }}</label>
                       </div>
                       <br>
-                  <button class="btn" onclick="sendingpending()">Sign Up</button>
+                  <button class="btn" onclick="sendingpending()">{{ trans('global.signup') }}</button>
                </form>
                <form method="POST" action="{{ route('login') }}" class="signin">
                 {{ csrf_field() }}
-                  <h1 class="signup1">SIGN IN</h1>
+                  <h1 class="signup1">{{ trans('global.signin') }}</h1>
                   <br><br>
                   @if($errors->has('email'))
                   <div class="signup3">
@@ -374,9 +375,20 @@
                     <br><br>
                     <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="E-mail" class="username"/>
                     <input style="margin-left:16%" name="password" required type="password" placeholder="Password" class="username"/>
-                    <button class="btn">Get Started</button>
+                    <button class="btn">{{ trans('global.login') }}</button>
+                    {{--  language switcher  --}}
+                    <div class="toggle toggle--text">
+                        <input type="checkbox" id="toggle--text" class="toggle--checkbox" />
+                        <label
+                          class="toggle--btn"
+                          for="toggle--text"
+                          data-label-on="on"
+                          data-label-off="off"
+                        ></label>
+                      </div>
+                            {{--    --}}
                     <br><br><br><br>
-                  <a href={{ route('forgotpassword') }}><p class="signup2">Forget Password?</p></a>
+                  <a href={{ route('forgotpassword') }}><p class="signup2"> {{ trans('global.forgot_password') }} </p></a>
                 </form>
             </div>
          </div>

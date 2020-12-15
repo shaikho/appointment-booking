@@ -21,7 +21,7 @@ use Carbon\Carbon;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\LabelAlignment;
-use Mail; 
+use Mail;
 
 class AppointmentsController extends Controller
 {
@@ -356,6 +356,8 @@ class AppointmentsController extends Controller
             return view('admin.appointments.draftedappointments');
         }
 
+        $datetocompare = $appointment->start_time;
+
         $completeappointments = Appointment::All()->where('status','<>','D');
         foreach ($completeappointments as $singleappointment){
             $date = $singleappointment->start_time->format('Y/m/d');
@@ -388,29 +390,31 @@ class AppointmentsController extends Controller
         $department = Employee::find($appointment->employee_id);
         $qrCode = new QrCode('http://127.0.0.1:8000/admin/appointments/'.$id);
 		$qrCode->setSize(300);
-		$qrCode->setMargin(10); 
+		$qrCode->setMargin(10);
 		$qrCode->setEncoding('UTF-8');
 		$qrCode->setWriterByName('png');
 		$qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
 		$qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0, 'a' => 0]);
 		$qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255, 'a' => 0]);
 		$qrCode->setLogoSize(150, 200);
-		$qrCode->setValidateResult(false);		
+		$qrCode->setValidateResult(false);
 		$qrCode->setRoundBlockSize(true);
 		$qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
 		header('Content-Type: '.$qrCode->getContentType());
         $qrCode->writeFile(public_path('/qrcode.png'));
-        
+
         $details = [
             'title' => 'From Appointment booking',
             'image' => 1,
-            'body' => 'Your appointment with '.$department->name.' department is approved for '. $appointment->start_time . ', 
-            Please contact the department for further inquerys on '.$department->phone.' . 
+            'body' => 'Your appointment with '.$department->name.' department is approved for '. $appointment->start_time . ',
+            Please contact the department for further inquerys on '.$department->phone.' .
             find below your QRCode.'
         ];
 
-        Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
-        
+        $user = User::find($appointment->client_id);
+
+        Mail::to($user->email)->send(new \App\Mail\MailTest($details));
+
         return view('admin.appointments.pendingappointments');
     }
 
@@ -478,7 +482,7 @@ class AppointmentsController extends Controller
             $department = Employee::find($appointment->employee_id);
             $qrCode = new QrCode('http://127.0.0.1:8000/admin/appointments/'.$appointment->id);
             $qrCode->setSize(300);
-            $qrCode->setMargin(10); 
+            $qrCode->setMargin(10);
             $qrCode->setEncoding('UTF-8');
             $qrCode->setWriterByName('png');
             $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH());
@@ -490,19 +494,21 @@ class AppointmentsController extends Controller
             $qrCode->setWriterOptions(['exclude_xml_declaration' => true]);
             header('Content-Type: '.$qrCode->getContentType());
             $qrCode->writeFile(public_path('/qrcode.png'));
-            
+
             $details = [
                 'title' => 'From Appointment booking',
                 'image' => 0,
-                'body' => 'Your appointment with '.$department->name.' department has been modified for '. $appointment->start_time . ', 
+                'body' => 'Your appointment with '.$department->name.' department has been modified for '. $appointment->start_time . ',
                 Please clicke the link below to approve the update and recive your QRcode. for further inquerys on '.$department->phone.' .
-                
 
-                
+
+
                 http://127.0.0.1:8000/admin/approve/'.$appointment->id
             ];
 
-            Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+            $user = User::find($appointment->client_id);
+
+            Mail::to($user->email)->send(new \App\Mail\MailTest($details));
             Session::put('emailsenttoclient','emailsent');
 
             return redirect()->route('admin.pendingappointments');

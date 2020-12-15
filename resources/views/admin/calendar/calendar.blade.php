@@ -49,7 +49,14 @@
             hiddenDays: array,
             // hiddenDays: [ 0,1,2,3,4,5,6,7 ],
             // weekends:false,
-            defaultView: 'agendaWeek'
+            defaultView: 'agendaWeek',
+            dayClick: function(date, jsEvent, view) {
+                var ajandamodu=view.name;
+                if(ajandamodu=='month')
+                {
+                    $('#calendar').fullCalendar( 'changeView', 'basicDay'  );
+                }
+            },
         })
     })
     </script>
