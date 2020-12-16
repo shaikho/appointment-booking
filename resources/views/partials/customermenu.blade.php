@@ -221,7 +221,11 @@
           <span></span>
         </button>
         <a href="{{ route("admin.home") }}" style="text-decoration: none">
-          <h4>Appointment<span> picker</span></h4>
+            @if(app()->getLocale() == 'ar')
+            <h4>{{ trans('global.appointment') }}<span> {{ trans('global.booking') }}</span></h4>
+            @else
+            <h4>{{ trans('global.appointment') }}<span> {{ trans('global.booking') }}</span></h4>
+            @endif
         </a>
       </div>
 
@@ -261,7 +265,7 @@
           <li class="navbar-dropdown {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}"><a href="{{ route('admin.users.show',Session::get('user_id')) }}" > <i class="nav-icon fa-fw fas fa fa-id-card-o"></i> {{ trans('global.profile') }}</a></li>
           <li><a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
             <i class="nav-icon fa-fw fas fa fa-sign-out"></i>
-            Logout</a></li>
+            {{ trans('global.logout') }}</a></li>
         </ul>
       </div>
     </div>

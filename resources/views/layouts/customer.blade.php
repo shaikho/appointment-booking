@@ -24,6 +24,8 @@
 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
+
+    {{--  english style  --}}
     <style>
         body {
             font-family: 'Roboto';
@@ -35,6 +37,62 @@
                 font-size: 0.9rem !important;
             }
     </style>
+
+    {{--  arabic style  --}}
+    @if(app()->getLocale() == 'ar')
+    <style>
+
+        input::-webkit-input-placeholder {
+        /* WebKit browsers */
+        text-align: right;
+        }
+        input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        text-align: right;
+        }
+        input::-moz-placeholder {
+        /* Mozilla Firefox 19+ but I'm not sure about working */
+        text-align: right;
+        }
+        input:-ms-input-placeholder {
+        /* Internet Explorer 10 */
+        text-align: right;
+        }
+        input::placeholder {
+        text-align: right;
+        }
+
+        .s2class {
+            text-align: right;
+        }
+
+        .s1class {
+            text-align: right;
+        }
+
+        .row {
+            text-align: right;
+        }
+
+        .page-title {
+            text-align: right;
+        }
+
+        .card {
+            text-align: right;
+        }
+
+        body {
+            font-size: 1rem !important;
+        }
+
+        .btn {
+            font-size: 0.9rem !important;
+            font-weight:400;
+        }
+    </style>
+    @endif
+
 </head>
 
 <body>

@@ -15,55 +15,124 @@
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->id }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.id') }}
+                        </th>
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.id') }}
                         </th>
                         <td>
                             {{ $user->id }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->name }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.name') }}
+                        </th>
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <td>
                             {{ $user->name }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->email }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <td>
                             {{ $user->email }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->gender }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.gender') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.gender') }}
                         </th>
                         <td>
                             {{ $user->gender }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->age }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.age') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.age') }}
                         </th>
                         <td>
                             {{ $user->age }}
                         </td>
+                        @endif
                     </tr>
                     @if(Session::get('role') != '2')
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $user->email_verified_at }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.user.fields.email_verified_at') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <td>
                             {{ $user->email_verified_at }}
                         </td>
+                        @endif
                     </tr>
                         <tr>
+                            @if(app()->getLocale() == 'ar')
+                            <td>
+                                @foreach($user->roles as $id => $roles)
+                                    <span class="label label-info label-many">{{ $roles->title }}</span>
+                                @endforeach
+                            </td>
+                            <th>
+                                Roles
+                            </th>
+
+                            @else
                             <th>
                                 Roles
                             </th>
@@ -72,6 +141,7 @@
                                     <span class="label label-info label-many">{{ $roles->title }}</span>
                                 @endforeach
                             </td>
+                            @endif
                         </tr>
                     @endif
                 </tbody>

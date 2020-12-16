@@ -18,4 +18,6 @@ class HomeController
         }
         return view('home');
     }
+
+    
 }

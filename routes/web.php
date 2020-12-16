@@ -3,9 +3,6 @@
 Route::redirect('/', '/login')->name('login');
 Route::redirect('/home', '/admin')->name('home');
 Auth::routes(['register' => false]);
-// Route::post('customerlogout',function(){
-//     return view('customerlogin');
-// })->name('customerlogout');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -57,15 +54,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 });
 
-// Customer login
-
-Route::get('customerlogin',function (){
-    return view('customerlogin');
-})->name('customerlogin');
-
 Route::get('forgotpassword',function (){
     return view('forgotpassword');
 })->name('forgotpassword');
+
+Route::get('setlocalar', function() {
+    App::setLocale('ar');
+    Session::put('language','ar');
+    return view('auth.login');
+});
+
+Route::get('setlocalen', function() {
+    App::setLocale('en');
+    Session::put('language','en');
+    return view('auth.login');
+});
+
 
 Route::group(['namespace' => 'Admin'], function () {
 
@@ -75,10 +79,4 @@ Route::group(['namespace' => 'Admin'], function () {
     Route::get('emailverification/{id}','UsersController@verifyemail')->name('emailverification');
     Route::post('resetpassword','UsersController@resetpassword')->name('resetpassword');
 
-});
-
-Route::post('setlocal/{id}',function ($id){
-    Session::put('local',$id);
-    App::setLocale($id);
-    return view('auth.login');
 });

@@ -8,7 +8,7 @@
         {{ trans('global.edit') }}
     </a>
 @endcan
-<br>
+<br><br>
 @if(Session::get('role') == '2')
 @can($submitGate)
     <form action="{{ route('admin.submit', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">

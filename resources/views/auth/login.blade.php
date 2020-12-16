@@ -150,7 +150,15 @@
                 background: #EE9BA3;
                 color: white;
                 font-size: 14px;
+                transition: all 0.3s ease 0s;
             }
+
+            .btn:hover {
+                background-color: #748194;
+                box-shadow: 0px 15px 20px rgba(116, 129, 148, 0.4);
+                transform: translateY(-7px);
+            }
+
             .signup1{
                 color:#748194;
                 font-size:30px;
@@ -309,8 +317,67 @@
             content: "";
         }
 
+        .button {
+            width: 55px;
+            height: 45px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 700;
+            color: white;
+            background-color: #EE9BA3;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .button:hover {
+            background-color: #748194;
+            box-shadow: 0px 15px 20px rgba(116, 129, 148, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
     </style>
-        <title>Document</title>
+
+    @if(app()->getLocale() == 'ar')
+    <style>
+
+        input::-webkit-input-placeholder {
+        /* WebKit browsers */
+        text-align: right;
+        }
+        input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        text-align: right;
+        }
+        input::-moz-placeholder {
+        /* Mozilla Firefox 19+ but I'm not sure about working */
+        text-align: right;
+        }
+        input:-ms-input-placeholder {
+        /* Internet Explorer 10 */
+        text-align: right;
+        }
+        input::placeholder {
+        text-align: right;
+        }
+
+        .s2class {
+            text-align: right;
+        }
+
+        .s1class {
+            text-align: right;
+        }
+    </style>
+    @endif
+
+    <title>Document</title>
+
     </head>
     <body>
         <div id="root"></div>
@@ -339,22 +406,31 @@
                         {{ $errors->first('password') }}
                     </div>
                     @endif
-                     <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="*" class="username"/>
-                     <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="E-mail*" class="username"/>
-                     <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="Phone number*" class="username"/>
-                     <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="Password*" class="username"/>
+                     <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="{{trans('global.user_name')}}*" class="username"/>
+                     <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="{{ trans('global.login_email') }}*" class="username"/>
+                     <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="{{ trans('global.phone') }}*" class="username"/>
+                     <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="{{ trans('global.login_password') }}*" class="username"/>
                      <h1 class="signup1" style="font-size: 20px;margin-top:-2%">{{ trans('cruds.user.fields.age') }}</h1>
                      <div class="range-slider" style="margin-left:15%;margin-top:-2% ">
                         <input id="age" name="age" class="range-slider__range" type="range" value="100" min="0" max="100"/>
                         <span class="range-slider__value" style="margin-left:80%;margin-top:-7%">0</span>
                       </div>
                      <h1 class="signup1" style="font-size: 20px">{{ trans('cruds.user.fields.gender') }}</h1>
-                     <div class="radio" style="margin-left: 8%">
+                     @if(app()->getLocale() == 'ar')
+                     <div class="radio" style="margin-left: 15%">
                         <input id="radio-1" name="gender" type="radio" value="M" checked>
                         <label for="radio-1" class="radio-label" style="color: #748194;font-weight:900" > {{ trans('global.male') }}</label>
                         <input id="radio-2" name="gender" type="radio" value="F">
                         <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" >  {{ trans('global.female') }}</label>
                       </div>
+                      @else
+                      <div class="radio" style="margin-left: 8%">
+                        <input id="radio-2" name="gender" type="radio" value="F">
+                        <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" >  {{ trans('global.female') }}</label>
+                        <input id="radio-1" name="gender" type="radio" value="M" checked>
+                        <label for="radio-1" class="radio-label" style="color: #748194;font-weight:900" > {{ trans('global.male') }}</label>
+                      </div>
+                      @endif
                       <br>
                   <button class="btn" onclick="sendingpending()">{{ trans('global.signup') }}</button>
                </form>
@@ -373,23 +449,17 @@
                     </div>
                     @endif
                     <br><br>
-                    <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="E-mail" class="username"/>
-                    <input style="margin-left:16%" name="password" required type="password" placeholder="Password" class="username"/>
+                    <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="{{ trans('global.login_email') }}" class="username"/>
+                    <input style="margin-left:16%" name="password" required type="password" placeholder="{{ trans('global.login_password') }}" class="username"/>
                     <button class="btn">{{ trans('global.login') }}</button>
-                    {{--  language switcher  --}}
-                    <div class="toggle toggle--text">
-                        <input type="checkbox" id="toggle--text" class="toggle--checkbox" />
-                        <label
-                          class="toggle--btn"
-                          for="toggle--text"
-                          data-label-on="on"
-                          data-label-off="off"
-                        ></label>
-                      </div>
-                            {{--    --}}
-                    <br><br><br><br>
+                    <br>
                   <a href={{ route('forgotpassword') }}><p class="signup2"> {{ trans('global.forgot_password') }} </p></a>
+                  <br>
                 </form>
+                <div style="margin-left: 32%" id="localselector">
+                    <a href="/setlocalar"><button class="button">ع</button></a>
+                    <a href="/setlocalen"><button class="button">EN</button></a>
+                </div>
             </div>
          </div>
     </body>
@@ -411,6 +481,7 @@
        $("#right").addClass("right_hover");
        $(".signin").css({"display":"none"});
        $(".signup").css({"display":""});
+       $("#localselector").hide();
     });
     $("#left").click(function(){
        $(".s1class").css({"color":"#EE9BA3"});
@@ -419,6 +490,7 @@
        $("#left").addClass("left_hover");
        $(".signup").css({"display":"none"});
        $(".signin").css({"display":""});
+       $("#localselector").show();
     });
     </script>
 
@@ -458,6 +530,7 @@ $(document).ready(function(){
        $("#left").addClass("left_hover");
        $(".signup").css({"display":"none"});
        $(".signin").css({"display":""});
+       $("#localselector").show();
     });
 </script>
 {{Session::forget('success')}}

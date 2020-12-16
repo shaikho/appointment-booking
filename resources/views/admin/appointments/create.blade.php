@@ -1,6 +1,20 @@
 @extends(Session::get('role') == '2' ? 'layouts.customer' : 'layouts.admin')
 {{--  {{dd($clients)}}  --}}
 @section('content')
+
+<style>
+    .ml13 {
+  font-size: 1.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-weight: 600;
+}
+
+.ml13 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+</style>
 <div class="card">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.appointment.title_singular') }}
@@ -108,11 +122,51 @@
                 </p>
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input onclick="showloader()" class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>
         </form>
 
 
     </div>
 </div>
+
+{{--  <h1 class="ml13">Rising Strong</h1>
+
+<script>
+
+    $(document).ready(function(){
+        $(".ml13").hide();
+    });
+
+    function showloader(){
+        $(".ml13").show();
+    }
+
+    // Wrap every letter in a span
+    var textWrapper = document.querySelector('.ml13');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: true})
+    .add({
+        targets: '.ml13 .letter',
+        translateY: [100,0],
+        translateZ: 0,
+        opacity: [0,1],
+        easing: "easeOutExpo",
+        duration: 1400,
+        delay: (el, i) => 300 + 30 * i
+    }).add({
+        targets: '.ml13 .letter',
+        translateY: [0,-100],
+        opacity: [1,0],
+        easing: "easeInExpo",
+        duration: 1200,
+        delay: (el, i) => 100 + 30 * i
+    });
+
+
+</script>  --}}
+
+{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>  --}}
+
 @endsection

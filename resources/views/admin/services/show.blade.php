@@ -11,20 +11,40 @@
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $service->id }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.service.fields.id') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.service.fields.id') }}
                         </th>
                         <td>
                             {{ $service->id }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $service->name }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.service.fields.name') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.service.fields.name') }}
                         </th>
                         <td>
                             {{ $service->name }}
                         </td>
+                        @endif
                     </tr>
                     {{-- <tr>
                         <th>

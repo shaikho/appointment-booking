@@ -3,10 +3,13 @@
 return [
     'actions'                              => 'Actions',
     'add'                                  => 'Add',
+    'appointment'                          => 'Appointment',
+    'booking'                              => 'Booking',
     'allRightsReserved'                    => 'All rights reserved.',
     'areYouSure'                           => 'Are you sure?',
     'clickHereToVerify'                    => 'Click here to verify',
     'create'                               => 'Create',
+    'services'                               => 'Services',
     'dashboard'                            => 'Dashboard',
     'delete'                               => 'Delete',
     'male'                               => 'Male',

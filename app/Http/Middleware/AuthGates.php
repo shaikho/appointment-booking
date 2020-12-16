@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Admin\RolesController as RolesController;
 use Session;
+use App;
 
 class AuthGates
 {
@@ -34,6 +35,8 @@ class AuthGates
             $role = RolesController::getuserrole($user->id);
             Session::put('role', $role);
             Session::put('user_id',$user->id);
+            $local = Session::get('local');
+            App::setLocale($local);
         }
 
         return $next($request);

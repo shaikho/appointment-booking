@@ -3,7 +3,7 @@
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
-            welcome to customer home and layout
+            {{--  {{ trans('global.login_password') }}  --}}
         </div>
     </div>
 </div>
