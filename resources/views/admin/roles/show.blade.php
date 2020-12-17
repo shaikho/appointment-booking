@@ -11,22 +11,52 @@
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
+                        @if(app()->getLocale('') == 'ar')
                         <th>
                             {{ trans('cruds.role.fields.id') }}
                         </th>
                         <td>
                             {{ $role->id }}
                         </td>
+                        @else
+                        <td>
+                            {{ $role->id }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.role.fields.id') }}
+                        </th>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale('') == 'ar')
+                        <td>
+                            {{ $role->title }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.role.fields.title') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.role.fields.title') }}
                         </th>
                         <td>
                             {{ $role->title }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale('') == 'ar')
+                        <td>
+                            @foreach($role->permissions as $id => $permissions)
+                                <span class="label label-info label-many">{{ $permissions->title }}</span>
+                            @endforeach
+                        </td>
+                        <th>
+                            Permissions
+                        </th>
+
+                        @else
                         <th>
                             Permissions
                         </th>
@@ -35,6 +65,8 @@
                                 <span class="label label-info label-many">{{ $permissions->title }}</span>
                             @endforeach
                         </td>
+                        @endif
+
                     </tr>
                 </tbody>
             </table>

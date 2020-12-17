@@ -36,6 +36,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Appointments
     Route::delete('appointments/destroy', 'AppointmentsController@massDestroy')->name('appointments.massDestroy');
     Route::resource('appointments', 'AppointmentsController');
+    Route::get('allappointments','AppointmentsController@allappointments')->name('allappointments');
     Route::get('draftedappointments','AppointmentsController@draftedappointments')->name('draftedappointments');
     Route::get('pendingappointments','AppointmentsController@pendingappointments')->name('pendingappointments');
     Route::get('approvedappointments','AppointmentsController@approvedappointments')->name('approvedappointments');
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 });
 
 Route::get('forgotpassword',function (){
+    App::setLocale(app()->getLocale());
     return view('forgotpassword');
 })->name('forgotpassword');
 

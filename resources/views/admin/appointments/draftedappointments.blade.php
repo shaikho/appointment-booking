@@ -123,6 +123,17 @@
 
 </script>
 
+@if (Session::has('created'))
+<script>
+Swal.fire(
+    'Success!',
+    'Appointment created waiting for your submission.',
+    'success'
+)
+</script>
+{{Session::forget('created')}}
+@endif
+
 @if (Session::has('success'))
 <script>
 Swal.fire(

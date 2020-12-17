@@ -35,8 +35,76 @@ class AppointmentsController extends Controller
                                     ->get();
             }else{
                 $query = Appointment::with(['client', 'employee', 'services'])
-                                    ->select(sprintf('%s.*', (new Appointment)->table));
+                                    ->select(sprintf('%s.*', (new Appointment)->table))
+                                    ->where('client_id','=',Session::get('filter_id'))
+                                    ->get();
             }
+
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'appointment_show';
+                $editGate      = 'appointment_edit';
+                $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
+                $crudRoutePart = 'appointments';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'approveGate',
+                    'declineGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->addColumn('employee_name', function ($row) {
+                return $row->employee ? $row->employee->name : '';
+            });
+
+            $table->editColumn('price', function ($row) {
+                return $row->price ? $row->price : "";
+            });
+            $table->editColumn('comments', function ($row) {
+                return $row->comments ? $row->comments : "";
+            });
+            $table->editColumn('services', function ($row) {
+                $labels = [];
+
+                foreach ($row->services as $service) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $service->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'employee', 'services']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.appointments.index');
+    }
+
+    public function allappointments(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = Appointment::with(['client', 'employee', 'services'])
+                                ->select(sprintf('%s.*', (new Appointment)->table));
+
 
             $table = Datatables::of($query);
 
@@ -440,6 +508,44 @@ class AppointmentsController extends Controller
 
     public function store(StoreAppointmentRequest $request)
     {
+        $message = 'N/A';
+        //get daily limitaion
+        $dailylimit = Limitaion::find(2);
+        $dailylimit = $dailylimit->limit;
+
+        //get duration limitaion
+        $durationlimit = Limitaion::find(3);
+        $durationlimit = $durationlimit->limit;
+
+        //to count up to day limit
+        $counter=0;
+
+        $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s', $request->finish_time);
+        $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s', $request->start_time);
+        $appointmenthours = $to->diffInHours($from);
+
+        if($appointmenthours > $durationlimit){
+            Session::put('hourslimitviolated','Hours limit violated');
+            return view('admin.appointments.draftedappointments');
+        }
+
+        $datetocompare = $request->start_time;
+
+        $completeappointments = Appointment::All()->where('status','<>','D');
+        foreach ($completeappointments as $singleappointment){
+            $date = $singleappointment->start_time->format('Y/m/d');
+            if($datetocompare == $date){
+                $counter = $counter + 1;
+            }
+        }
+
+        if($counter < $dailylimit){
+            Session::put('created','Appointment created.');
+        }else{
+            Session::put('datelimitfail','Sorry picked date is fully booked.');
+        }
+
+
         $appointment = Appointment::create($request->all());
         if(Session::get('role') != '2'){
             $appointment->status = 'A';
@@ -496,10 +602,10 @@ class AppointmentsController extends Controller
             $qrCode->writeFile(public_path('/qrcode.png'));
 
             $details = [
-                'title' => 'From Appointment booking',
+                'title' => trans('global.emailsentfrom'),
                 'image' => 0,
-                'body' => 'Your appointment with '.$department->name.' department has been modified for '. $appointment->start_time . ',
-                Please clicke the link below to approve the update and recive your QRcode. for further inquerys on '.$department->phone.' .
+                'body' => 'Your appointment with '.$department->name.' department has been modified to start from '. $appointment->start_time . ' and end on '.$appointment->finish_time.',
+                Please click the link below to approve the update and recive your QRcode. for further inquerys on '.$department->phone.' .
 
 
 

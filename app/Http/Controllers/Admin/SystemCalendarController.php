@@ -26,8 +26,6 @@ class SystemCalendarController extends Controller
                                           ->where('client_id','!=',Session::get('user_id'))
                                           ->get();
 
-        // return $othersappointments;
-
         if(Session::get('role') == '2'){
 
             foreach ($othersappointments as $appointment) {
@@ -49,11 +47,20 @@ class SystemCalendarController extends Controller
                     continue;
                 }
 
-                $myevents[] = [
-                    'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
-                    'start' => $appointment->start_time,
-                    'url'   => route('admin.appointments.edit', $appointment->id),
-                ];
+                if(Session::get('role') == '4'){
+                    $myevents[] = [
+                        'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
+                        'start' => $appointment->start_time,
+                        'url'   => route('admin.appointments.show', $appointment->id),
+                    ];
+                }else{
+                    $myevents[] = [
+                        'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
+                        'start' => $appointment->start_time,
+                        'url'   => route('admin.appointments.edit', $appointment->id),
+                    ];
+                }
+
             }
         }else{
             foreach ($othersappointments as $appointment) {
@@ -61,11 +68,19 @@ class SystemCalendarController extends Controller
                     continue;
                 }
 
-                $othersevents[] = [
-                    'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
-                    'start' => $appointment->start_time,
-                    'url'   => route('admin.appointments.edit', $appointment->id),
-                ];
+                if(Session::get('role') == '4'){
+                    $othersevents[] = [
+                        'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
+                        'start' => $appointment->start_time,
+                        'url'   => route('admin.appointments.show', $appointment->id),
+                    ];
+                }else{
+                    $othersevents[] = [
+                        'title' => $appointment->client->name . ' ('.$appointment->employee->name.')',
+                        'start' => $appointment->start_time,
+                        'url'   => route('admin.appointments.edit', $appointment->id),
+                    ];
+                }
             }
     }
 

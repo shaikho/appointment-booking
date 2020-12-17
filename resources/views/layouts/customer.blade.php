@@ -80,15 +80,23 @@
 
         .card {
             text-align: right;
+            font-size: 0.9rem !important;
+            font-weight: 500;
+            direction: rtl;
         }
 
         body {
-            font-size: 1rem !important;
+            font-size: 0.9rem !important;
+            /* direction: rtl; */
+        }
+
+        li {
+            font-size: 1.01rem !important;
         }
 
         .btn {
-            font-size: 0.9rem !important;
-            font-weight:400;
+            font-size: 1.0rem !important;
+            font-weight:500;
         }
     </style>
     @endif

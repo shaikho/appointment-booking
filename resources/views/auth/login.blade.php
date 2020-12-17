@@ -395,17 +395,6 @@
                <form action="{{ route("customerregister") }}" method="POST" enctype="multipart/form-data" class="signup">
                 @csrf
                   <h1 class="signup1">{{ trans('global.signup') }}</h1>
-                  @if($errors->has('email'))
-                  <div class="signup3" style="padding-bottom:5px">
-                      {{ $errors->first('email') }}
-                      <br>
-                    </div>
-                    @endif
-                    @if($errors->has('password'))
-                    <div class="signup3">
-                        {{ $errors->first('password') }}
-                    </div>
-                    @endif
                      <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="{{trans('global.user_name')}}*" class="username"/>
                      <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="{{ trans('global.login_email') }}*" class="username"/>
                      <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="{{ trans('global.phone') }}*" class="username"/>
@@ -433,6 +422,17 @@
                       @endif
                       <br>
                   <button class="btn" onclick="sendingpending()">{{ trans('global.signup') }}</button>
+                  @if($errors->has('email'))
+                  <div class="signup3" style="padding-bottom:5px">
+                      {{ $errors->first('email') }}
+                      <br>
+                    </div>
+                    @endif
+                    @if($errors->has('password'))
+                    <div class="signup3">
+                        {{ $errors->first('password') }}
+                    </div>
+                    @endif
                </form>
                <form method="POST" action="{{ route('login') }}" class="signin">
                 {{ csrf_field() }}
@@ -456,9 +456,9 @@
                   <a href={{ route('forgotpassword') }}><p class="signup2"> {{ trans('global.forgot_password') }} </p></a>
                   <br>
                 </form>
-                <div style="margin-left: 32%" id="localselector">
+                <div style="margin-left: 30%" id="localselector">
                     <a href="/setlocalar"><button class="button">ع</button></a>
-                    <a href="/setlocalen"><button class="button">EN</button></a>
+                    <a href="/setlocalen"><button style="margin-left: 5%" class="button">EN</button></a>
                 </div>
             </div>
          </div>
@@ -517,9 +517,11 @@
 
 @if (Session::has('success'))
 <script>
+var header = {!! json_encode(trans('global.emailsent')) !!};
+var message = {!! json_encode(trans('global.emailsent')) !!};
 Swal.fire(
-  'Account Created!',
-  'An email has been sent to your email please verify.',
+    header,
+    message,
   'info'
 );
 $(document).ready(function(){
@@ -538,9 +540,11 @@ $(document).ready(function(){
 
 @if (Session::has('passwordupdated'))
 <script>
+    var header = {!! json_encode(trans('global.passwordupdated')) !!};
+var message = {!! json_encode(trans('global.passwordupdatedmessage')) !!};
 Swal.fire(
-  'Password updated',
-  'Your password has been updated you can login now.',
+    header,
+    message,
   'success'
 );
 </script>
@@ -549,9 +553,11 @@ Swal.fire(
 
 @if (Session::has('somethingwentwrong'))
 <script>
+    var header = {!! json_encode(trans('global.fail')) !!};
+var message = {!! json_encode(trans('global.somethingwentwrong')) !!};
 Swal.fire(
-  'Failed!',
-  'Something went wrong.',
+    header,
+    message,
   'fail'
 );
 </script>
@@ -560,9 +566,11 @@ Swal.fire(
 
 @if (Session::has('emailsent'))
 <script>
+    var header = {!! json_encode(trans('global.emailsent')) !!};
+var message = {!! json_encode(trans('global.resetemailsent')) !!};
 Swal.fire(
-  'E-mail sent!',
-  'An email has been sent to your email with reset link.',
+  header,
+  message,
   'info'
 );
 </script>
@@ -571,9 +579,11 @@ Swal.fire(
 
 @if (Session::has('emailverification'))
 <script>
+    var header = {!! json_encode(trans('global.emailverified')) !!};
+var message = {!! json_encode(trans('global.emailverificationcomplete')) !!};
 Swal.fire(
-  'Success!',
-  'E-mail verification complete you can login now.',
+    header,
+    message,
   'success'
 )
 $(document).ready(function(){
@@ -591,9 +601,11 @@ $(document).ready(function(){
 
 @if (Session::has('fail'))
 <script>
+    var header = {!! json_encode(trans('global.success')) !!};
+var message = {!! json_encode(trans('global.somethingwentwrong')) !!};
 Swal.fire(
-  'Failed!',
-  'Something went wrong, please try again.',
+  header,
+  message,
   'error'
 )
 </script>

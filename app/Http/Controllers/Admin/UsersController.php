@@ -82,9 +82,11 @@ class UsersController extends Controller
 
         $encrypted = Crypt::encryptString($user->id);
         $details = [
-            'title' => 'Mail from Appointment booking',
+            'title' => trans('global.emailfrom'),
             'image' => 0,
-            'body' => 'Verify your account by clicking the following link
+            'body' => trans('global.verifyaccount') .
+            '
+
             http://127.0.0.1:8000/emailverification/'.$encrypted
         ];
 
@@ -112,10 +114,10 @@ class UsersController extends Controller
         $user = User::where('email',$request->email)->get();
         $encrypted = Crypt::encryptString($user[0]->id);
         $details = [
-            'title' => 'Mail from Appointment booking',
+            'title' => trans('global.emailsentfrom'),
             'image' => 0,
-            'body' => 'Your password reset link is here
-            http://127.0.0.1:8000/changepassword/'.$encrypted
+            'body' => trans('global.passwordresetlinkishere').
+            'http://127.0.0.1:8000/changepassword/'.$encrypted
         ];
 
         Mail::to($user[0]->email)->send(new \App\Mail\MailTest($details));
@@ -155,10 +157,8 @@ class UsersController extends Controller
 
         $user->load('roles');
 
-        // $appointments = Appointment::All()->where('client_id','=',$user->id)->get();
-        // $appointments = Appointment::with(['client', 'employee', 'services'])->where('client_id','=',$user->id)->get();
-        // return $appointments;
-
+        $appointments = Appointment::All()->where('client_id','=',$user->id)->get();
+        $appointments = Appointment::with(['client', 'employee', 'services'])->where('client_id','=',$user->id)->get();
 
         return view('admin.users.edit', compact('roles', 'user','appointments'));
     }
@@ -185,6 +185,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->load('roles');
+        Session::put('filter_id',$user->id);
 
         return view('admin.users.show', compact('user'));
     }

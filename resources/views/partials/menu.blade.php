@@ -61,6 +61,16 @@
                         {{ trans('cruds.appointment.title') }}
                     </a>
                     <ul class="nav-dropdown-items">
+                        @can('all_appointments')
+                            <li class="nav-item">
+                                <a href="{{ route("admin.allappointments") }}" class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}">
+                                    <i class="fa-fw fas fa-unlock-alt nav-icon">
+
+                                    </i>
+                                    {{ trans('global.allappointments') }}
+                                </a>
+                            </li>
+                        @endcan
                         @can('pending_appointment_access')
                             <li class="nav-item">
                                 <a href="{{ route("admin.pendingappointments") }}" class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}">

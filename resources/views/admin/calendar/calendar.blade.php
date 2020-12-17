@@ -47,6 +47,10 @@
                 ,othersevents
             ],
             hiddenDays: array,
+            validRange: {
+                start: '2020-12-21',
+                end: '2020-12-25'
+            },
             // hiddenDays: [ 0,1,2,3,4,5,6,7 ],
             // weekends:false,
             defaultView: 'agendaWeek',

@@ -23,6 +23,62 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/images/icons8-calendar-100.png') }}" rel="shortcut icon" type="image/x-icon" />
     @yield('styles')
+    {{--  arabic style  --}}
+    @if(app()->getLocale() == 'ar')
+    <style>
+
+        input::-webkit-input-placeholder {
+        /* WebKit browsers */
+        text-align: right;
+        }
+        input:-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        text-align: right;
+        }
+        input::-moz-placeholder {
+        /* Mozilla Firefox 19+ but I'm not sure about working */
+        text-align: right;
+        }
+        input:-ms-input-placeholder {
+        /* Internet Explorer 10 */
+        text-align: right;
+        }
+        input::placeholder {
+        text-align: right;
+        }
+
+        .s2class {
+            text-align: right;
+        }
+
+        .s1class {
+            text-align: right;
+        }
+
+        .row {
+            text-align: right;
+        }
+
+        .page-title {
+            text-align: right;
+        }
+
+        .card {
+            text-align: right;
+            font-weight: 500;
+        }
+
+        body {
+            font-size: 0.9rem !important;
+            /* direction: rtl; */
+        }
+
+        .btn {
+            font-size: 0.8rem !important;
+            font-weight:500;
+        }
+    </style>
+    @endif
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">

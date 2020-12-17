@@ -7,6 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <link href="{{ asset('assets/images/icons8-calendar-100.png') }}" rel="shortcut icon" type="image/x-icon" />
         <style>
             body {
                 background:#f5d7d9;
@@ -149,6 +150,13 @@
                 background: #EE9BA3;
                 color: white;
                 font-size: 14px;
+                transition: all 0.3s ease 0s;
+            }
+
+            .btn:hover {
+                background-color: #748194;
+                box-shadow: 0px 15px 20px rgba(116, 129, 148, 0.4);
+                transform: translateY(-7px);
             }
             .signup1{
                 color:#748194;
@@ -308,7 +316,40 @@
             content: "";
         }
     </style>
-        <title>Document</title>
+
+@if(app()->getLocale() == 'ar')
+<style>
+
+    input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    text-align: right;
+    }
+    input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    text-align: right;
+    }
+    input::-moz-placeholder {
+    /* Mozilla Firefox 19+ but I'm not sure about working */
+    text-align: right;
+    }
+    input:-ms-input-placeholder {
+    /* Internet Explorer 10 */
+    text-align: right;
+    }
+    input::placeholder {
+    text-align: right;
+    }
+
+    .s2class {
+        text-align: right;
+    }
+
+    .s1class {
+        text-align: right;
+    }
+</style>
+@endif
+        <title>Password reset</title>
     </head>
     <body>
         <div id="root"></div>
@@ -317,8 +358,8 @@
                <form method="POST" action="{{ route('resetpassword') }}" class="signin">
                 {{ csrf_field() }}
                 <br>
-                  <h1 class="signup1">Forgout Password</h1>
-                  <h4 class="signup2">Enter your e-mail to reset your password</h1>
+                  <h1 style="font-size:1.6rem" class="signup1">{{trans('global.forgot_password')}}</h1>
+                  <h4 class="signup2">{{ trans('global.enternewpassword') }}</h1>
                   @if($errors->has('email'))
                   <div class="signup3">
                       {{ $errors->first('email') }}
@@ -330,11 +371,11 @@
                     </div>
                     @endif
                     <br><br>
-                    <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="E-mail" class="username"/>
+                    <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="{{trans('cruds.user.fields.email')}}" class="username"/>
                     <br>
-                    <button class="btn">Reset</button>
+                    <button class="btn">{{trans('global.reset')}}</button>
                     <br><br>
-                  <a href="{{ route('login') }}"><p class="signup2">Back to login</p></a>
+                  <a href="{{ route('login') }}"><p class="signup2">{{ trans('global.backtolgoin') }}</p></a>
                 </form>
             </div>
          </div>
