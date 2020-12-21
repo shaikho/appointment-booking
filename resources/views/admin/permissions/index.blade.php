@@ -19,18 +19,31 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Permission">
                 <thead>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
                         <th width="10">
 
                         </th>
+                        @else
+                        <th>
+                            Actions
+                        </th>
+                        @endif
                         <th>
                             {{ trans('cruds.permission.fields.id') }}
                         </th>
                         <th>
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
+                        @if(app()->getLocale() == 'ar')
                         <th>
-                            &nbsp;
+                            العمليات
                         </th>
+
+                        @else
+                        <th width="10">
+
+                        </th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +64,7 @@
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
+
 
                                 @can('permission_edit')
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.permissions.edit', $permission->id) }}">

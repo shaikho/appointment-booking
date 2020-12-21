@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Limitaion extends Model
+class Holiday extends Model
 {
     use SoftDeletes,HasFactory;
 
-    public $table = 'limitations';
+    public $table = 'holidays';
 
     protected $fillable = [
-        'limitaion',
-        'limit',
+        'date',
     ];
 }

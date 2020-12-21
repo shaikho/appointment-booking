@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Limitaions
     Route::get('limitaions','LimitaionsController@index')->name('limitaions');
     Route::get('editlimitaions/{id}','LimitaionsController@edit')->name('editlimitaions');
+    Route::get('addglobalholidays','LimitaionsController@addglobalholidays')->name('addglobalholidays');
+    Route::post('updatelimitaions','LimitaionsController@update')->name('updatelimitaions');
     Route::put('updatelimitaions','LimitaionsController@update')->name('updatelimitaions');
 
 });
@@ -82,3 +84,5 @@ Route::group(['namespace' => 'Admin'], function () {
     Route::post('resetpassword','UsersController@resetpassword')->name('resetpassword');
 
 });
+
+Route::post('adddate','LimitaionsController@adddate')->name('adddate');

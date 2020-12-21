@@ -11,20 +11,39 @@
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $permission->id }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.permission.fields.id') }}
+                        </th>
+                        @else
                         <th>
                             {{ trans('cruds.permission.fields.id') }}
                         </th>
                         <td>
                             {{ $permission->id }}
                         </td>
+                        @endif
                     </tr>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
+                        <td>
+                            {{ $permission->title }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.permission.fields.title') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.permission.fields.title') }}
                         </th>
                         <td>
                             {{ $permission->title }}
                         </td>
+                        @endif
                     </tr>
                 </tbody>
             </table>

@@ -18,9 +18,13 @@
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Employee">
             <thead>
                 <tr>
+                    @if(app()->getLocale() == 'ar')
                     <th width="10">
 
                     </th>
+                    @else
+                    <th>Actions</th>
+                    @endif
                     <th>
                         {{ trans('cruds.employee.fields.id') }}
                     </th>
@@ -39,9 +43,14 @@
                     <th>
                         {{ trans('cruds.employee.fields.services') }}
                     </th>
-                    <th>
-                        &nbsp;
+                    @if(app()->getLocale() == 'ar')
+                    <th>العمليات</th>
+
+                    @else
+                    <th width="10">
+
                     </th>
+                    @endif
                 </tr>
             </thead>
         </table>
@@ -103,7 +112,7 @@
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 100,F
   };
   $('.datatable-Employee').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

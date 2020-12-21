@@ -117,7 +117,11 @@ class UsersController extends Controller
             'title' => trans('global.emailsentfrom'),
             'image' => 0,
             'body' => trans('global.passwordresetlinkishere').
-            'http://127.0.0.1:8000/changepassword/'.$encrypted
+            '
+
+
+
+            http://127.0.0.1:8000/changepassword/'.$encrypted
         ];
 
         Mail::to($user[0]->email)->send(new \App\Mail\MailTest($details));

@@ -14,6 +14,7 @@ return [
     'services'                               => 'الخدمات',
     'male'                               => 'ذكر',
     'female'                               => 'أنثى',
+    'globalholiday'                         => 'ناريخ إجازة عامة',
     'cancel'                               => 'إلغاء',
     'approve'                               => 'تأكيد',
     'header'                               => 'حجز المواعيد - تسجيل الدخول',

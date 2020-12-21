@@ -19,9 +19,15 @@
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Appointment">
             <thead>
                 <tr>
-                    <th width="10">
-
-                    </th>
+                    @if (app()->getLocale() == 'en')
+                        <th width="10">
+                        Actions
+                        </th>
+                    @else
+                        <th>
+                            &nbsp;
+                        </th>
+                    @endif
                     <th>
                         {{ trans('cruds.drafted_appointment.fields.id') }}
                     </th>
@@ -46,9 +52,16 @@
                     <th>
                         {{ trans('cruds.drafted_appointment.fields.services') }}
                     </th>
-                    <th>
-                        &nbsp;
-                    </th>
+                    @if (app()->getLocale() == 'en')<th>
+                            &nbsp;
+                        </th>
+
+                        
+                    @else
+                        <th width="10">
+                        العمليات
+                        </th>
+                    @endif
                 </tr>
             </thead>
         </table>

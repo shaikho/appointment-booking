@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Dec 14, 2020 at 10:23 AM
+-- Generation Time: Dec 17, 2020 at 02:04 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.4.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `appointments2`
+-- Database: `appointments`
 --
 
 -- --------------------------------------------------------
@@ -45,20 +45,18 @@ CREATE TABLE IF NOT EXISTS `appointments` (
   PRIMARY KEY (`id`),
   KEY `client_fk_360714` (`client_id`),
   KEY `employee_fk_360715` (`employee_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `appointments`
 --
 
 INSERT INTO `appointments` (`id`, `start_time`, `finish_time`, `price`, `status`, `comments`, `created_at`, `updated_at`, `deleted_at`, `client_id`, `employee_id`, `user_id`) VALUES
-(19, '2020-12-12 11:00:00', '2020-12-12 11:00:00', NULL, 'A', 'Doloribus consequatu', '2020-12-12 07:00:47', '2020-12-13 18:39:54', NULL, 3, 1, NULL),
-(17, '2020-12-12 00:00:00', '2020-12-13 03:45:00', NULL, 'A', 'Ipsum eiusmod dolor', '2020-12-11 23:42:30', '2020-12-13 18:37:58', NULL, 2, 2, NULL),
-(23, '2020-12-14 14:00:00', '2020-12-13 14:00:00', NULL, 'A', NULL, '2020-12-12 09:54:30', '2020-12-13 20:08:23', NULL, 2, 1, NULL),
-(24, '2020-12-13 10:30:00', '2020-12-12 17:30:00', NULL, 'A', NULL, '2020-12-12 09:55:08', '2020-12-13 19:57:21', NULL, 2, 1, NULL),
-(14, '2020-12-12 03:30:00', '2020-12-12 03:30:00', NULL, 'A', '3', '2020-12-11 23:35:54', '2020-12-13 14:13:52', NULL, 2, 1, NULL),
-(20, '2020-12-12 11:00:00', '2020-12-12 11:00:00', NULL, 'P', 'Doloribus consequatu', '2020-12-12 07:00:49', '2020-12-13 14:29:58', NULL, 3, 1, NULL),
-(22, '2020-12-12 11:00:00', '2020-12-12 11:00:00', NULL, 'A', 'Est necessitatibus', '2020-12-12 07:05:42', '2020-12-13 20:10:57', NULL, 3, 5, NULL);
+(41, '2020-12-17 11:45:00', '2020-12-17 14:45:00', NULL, 'D', NULL, '2020-12-17 07:48:12', '2020-12-17 07:48:12', NULL, 19, 2, NULL),
+(40, '2020-12-17 15:00:00', '2020-12-17 18:00:00', NULL, 'P', 'any comment', '2020-12-17 06:07:10', '2020-12-17 07:48:32', NULL, 19, 6, NULL),
+(39, '2020-12-17 13:00:00', '2020-12-17 14:00:00', NULL, 'A', 'dental cleanup', '2020-12-17 05:52:53', '2020-12-17 06:00:27', NULL, 19, 3, NULL),
+(38, '2020-12-17 09:00:00', '2020-12-17 11:00:00', NULL, 'A', 'dental cleaning', '2020-12-17 05:26:05', '2020-12-17 05:34:21', NULL, 17, 2, NULL),
+(37, '2020-12-17 05:30:00', '2020-12-17 07:00:00', NULL, 'A', 'dental check', '2020-12-17 05:11:28', '2020-12-17 05:34:51', '2020-12-17 05:34:51', 2, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +130,61 @@ INSERT INTO `appointment_service` (`appointment_id`, `service_id`) VALUES
 (22, 8),
 (22, 9),
 (23, 5),
-(24, 5);
+(24, 5),
+(25, 3),
+(25, 4),
+(25, 7),
+(25, 9),
+(25, 10),
+(26, 7),
+(27, 1),
+(27, 2),
+(27, 3),
+(27, 4),
+(27, 5),
+(27, 6),
+(27, 7),
+(27, 8),
+(27, 9),
+(27, 10),
+(28, 5),
+(29, 3),
+(30, 2),
+(30, 6),
+(30, 9),
+(30, 10),
+(31, 2),
+(31, 3),
+(31, 5),
+(31, 7),
+(31, 9),
+(32, 2),
+(32, 3),
+(32, 5),
+(32, 7),
+(32, 9),
+(33, 2),
+(33, 3),
+(33, 4),
+(33, 6),
+(33, 8),
+(33, 9),
+(34, 2),
+(34, 3),
+(34, 4),
+(34, 5),
+(34, 9),
+(36, 2),
+(36, 3),
+(36, 4),
+(36, 5),
+(36, 6),
+(36, 9),
+(37, 3),
+(38, 3),
+(39, 2),
+(40, 11),
+(41, 5);
 
 -- --------------------------------------------------------
 
@@ -184,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employees`
@@ -195,7 +247,8 @@ INSERT INTO `employees` (`id`, `name`, `email`, `phone`, `created_at`, `updated_
 (2, 'Frederick Bradtke', 'corwin.estell@yahoo.com', '1-216-845-9930 x80051', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
 (3, 'Charlotte Dickens', 'murray.greta@kiehn.com', '1-790-873-1018', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
 (4, 'Dr. Barry Balistreri II', 'qbednar@cremin.com', '1-914-879-0774 x0122', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
-(5, 'Arnoldo Nikolaus', 'homenick.sallie@hotmail.com', '426.806.2924 x119', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL);
+(5, 'Arnoldo Nikolaus', 'homenick.sallie@hotmail.com', '426.806.2924 x119', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
+(6, 'eyes department', 'eye@eyes.com', '0509999999', '2020-12-17 06:05:10', '2020-12-17 06:05:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -210,6 +263,13 @@ CREATE TABLE IF NOT EXISTS `employee_service` (
   KEY `employee_id_fk_360622` (`employee_id`),
   KEY `service_id_fk_360622` (`service_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employee_service`
+--
+
+INSERT INTO `employee_service` (`employee_id`, `service_id`) VALUES
+(6, 11);
 
 -- --------------------------------------------------------
 
@@ -233,8 +293,8 @@ CREATE TABLE IF NOT EXISTS `limitations` (
 --
 
 INSERT INTO `limitations` (`id`, `limitation`, `limit`, `deleted_at`, `updated_at`, `created_at`) VALUES
-(1, 'allowed_days', '[0,1,2,3,4]', NULL, '2020-12-13 23:49:33', NULL),
-(2, 'maximum_appointments_per_day', '5', NULL, '2020-12-12 08:45:56', NULL),
+(1, 'allowed_days', '[6,5]', NULL, '2020-12-17 08:03:30', NULL),
+(2, 'maximum_appointments_per_day', '7', NULL, '2020-12-17 08:02:26', NULL),
 (3, 'appointment_duration_per_day', '3', NULL, '2020-12-12 11:43:29', NULL);
 
 -- --------------------------------------------------------
@@ -430,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -475,7 +535,8 @@ INSERT INTO `permissions` (`id`, `title`, `created_at`, `updated_at`, `deleted_a
 (40, 'decline_appointments', '2019-09-19 10:14:15', '2019-09-19 10:14:15', NULL),
 (42, 'submit_appointments', '2019-09-19 10:14:15', '2019-09-19 10:14:15', NULL),
 (43, 'limitations_management', '2020-12-11 20:58:57', '2020-12-11 20:58:57', NULL),
-(44, 'limitations_edit', '2020-12-11 21:15:48', '2020-12-11 21:15:48', NULL);
+(44, 'limitations_edit', '2020-12-11 21:15:48', '2020-12-11 21:15:48', NULL),
+(45, 'all_appointments', '2020-12-17 04:37:06', '2020-12-17 04:37:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +611,34 @@ INSERT INTO `permission_role` (`role_id`, `permission_id`) VALUES
 (2, 38),
 (1, 43),
 (2, 16),
-(2, 42);
+(2, 42),
+(4, 34),
+(4, 36),
+(4, 45),
+(3, 14),
+(3, 16),
+(3, 17),
+(3, 18),
+(3, 19),
+(3, 20),
+(3, 21),
+(3, 22),
+(3, 23),
+(3, 24),
+(3, 25),
+(3, 26),
+(3, 32),
+(3, 33),
+(3, 34),
+(3, 35),
+(3, 36),
+(3, 37),
+(3, 38),
+(3, 39),
+(3, 40),
+(3, 43),
+(3, 44),
+(3, 45);
 
 -- --------------------------------------------------------
 
@@ -566,7 +654,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -575,7 +663,8 @@ CREATE TABLE IF NOT EXISTS `roles` (
 INSERT INTO `roles` (`id`, `title`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Admin', '2019-09-19 10:08:28', '2019-09-19 10:08:28', NULL),
 (2, 'Customer', '2019-09-19 10:08:28', '2019-09-19 10:08:28', NULL),
-(3, 'Organization', '2019-09-19 10:08:28', '2019-09-19 10:08:28', NULL);
+(3, 'Organization', '2019-09-19 10:08:28', '2019-09-19 10:08:28', NULL),
+(4, 'receptionist', '2020-12-15 07:20:43', '2020-12-15 07:20:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -600,7 +689,23 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (2, 2),
 (3, 2),
 (4, 2),
-(5, 2);
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(10, 2),
+(11, 2),
+(12, 4),
+(13, 3),
+(14, 2),
+(15, 2),
+(16, 2),
+(17, 2),
+(18, 2),
+(19, 2),
+(20, 2),
+(21, 2);
 
 -- --------------------------------------------------------
 
@@ -617,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `services`
@@ -633,7 +738,8 @@ INSERT INTO `services` (`id`, `name`, `price`, `created_at`, `updated_at`, `dele
 (7, 'tempore', '21.00', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
 (8, 'rerum', '24.00', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
 (9, 'nostrum', '13.00', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
-(10, 'voluptas', '20.00', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL);
+(10, 'voluptas', '20.00', '2020-12-11 20:02:15', '2020-12-11 20:02:15', NULL),
+(11, 'eye checkup', '1000.00', '2020-12-17 06:04:36', '2020-12-17 06:04:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -656,7 +762,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -666,8 +772,16 @@ INSERT INTO `users` (`id`, `name`, `age`, `gender`, `email`, `phone`, `email_ver
 (1, 'Admin', NULL, NULL, 'admin@admin.com', NULL, NULL, '$2y$10$5jMSFqk0WtypLxWTcknMHOd2WiNDuE3C6ElThTSiQsSZuR/pIx.2G', NULL, '2019-09-19 10:08:28', '2019-09-19 10:08:28', NULL),
 (2, 'TEST', '100', 'M', 'test@test.com', '0908648033', NULL, '$2y$10$n0bhKB7/2aJljAduUbpWiuqiNNSVUguhJStYC//.uxhhSSbDUAgL2', NULL, '2020-12-11 20:05:04', '2020-12-12 18:50:09', NULL),
 (3, 'Duncan Chen', '9', 'F', 'alsotest@alsotest.com', '0509999999', NULL, '$2y$10$9v2It0Vsv0Dv6vAJX5KbReecqiN4FRUFhbhBnS/BIgmskGBYlR7Fq', NULL, '2020-12-11 20:30:03', '2020-12-12 07:13:24', NULL),
-(4, 'Florence Golden', '42', 'F', 'qefylaxix@mailinator.com', '0908648033', NULL, '$2y$10$5Evo0o1mF831X5/PJlqgaOlYlnr2o7zuFP5lWeXlgbjKSgE2Y5xJq', NULL, '2020-12-13 13:01:22', '2020-12-13 13:01:22', NULL),
-(5, 'Fiona Fuller', '47', 'M', 'cadugori@mailinator.com', '0509999999', NULL, '$2y$10$pHPAMioQMKynkj1mlLx6Xu0AmG6MFAQaniGoOUZR.MQcJU51GnN5m', NULL, '2020-12-13 20:09:15', '2020-12-13 20:09:15', NULL);
+(9, 'Paula Lynch', '39', 'M', 'lyke3ve@mailinator.com', '0509999999', NULL, '$2y$10$1GnNJc3hMZMvEMWMWAQ3YuG3EkAp3IsgwRzwfuELAP//5uKhHMzha', NULL, '2020-12-16 13:37:45', '2020-12-16 13:37:45', NULL),
+(8, 'Emma Hardy', '0', 'M', 'cuni@mailinator.com', '0908648033', NULL, '$2y$10$JRqfNO3ng8yqTRPpT.B4LOqF3HiUVvCkTVlDuT2R1zqyhNmlIwHpi', NULL, '2020-12-16 13:36:43', '2020-12-16 13:36:43', NULL),
+(17, 'Emma Hardy', '0', 'F', 'cadugori@mailinator.com', '0908648033', NULL, '$2y$10$16zuQzcX3v70gkWsTNTV6uEIT9NB4jFO3mIlRjJ/nR/Iwmt285.cy', NULL, '2020-12-16 13:36:22', '2020-12-16 13:36:22', NULL),
+(10, 'Emma Hardy', '24', 'M', 'peq4of@mailinator.com', '0908648033', NULL, '$2y$10$CcneN7lXlEBLx5AUTj9g3.DHiSJTu8gOlSOSDTR2q.D1RDg7YetUS', NULL, '2020-12-16 13:39:29', '2020-12-16 13:39:29', NULL),
+(14, 'Martina Carver', '92', 'M', 'qefylaxix@mailinator.com', '0908648033', NULL, '$2y$10$lDYddZAD8YvBZRdAOL5bwe8.H6P/cZufrPl.WHi/XVTqmDQWQzP9u', NULL, '2020-12-17 05:06:26', '2020-12-17 05:06:26', NULL),
+(12, 'receiption', NULL, NULL, 'receiption@receiption.com', NULL, NULL, '$2y$10$3IHcfzg9t89H.gWPf9/jR.QAqFOBnXFpoMu0srByxz7.a2CwKwLYe', NULL, '2020-12-17 04:38:02', '2020-12-17 04:38:02', NULL),
+(13, 'Organization', NULL, NULL, 'organization@organization.com', NULL, NULL, '$2y$10$xR3H7qBXQYvOE8y9f3EuruDbOdv57RvdwZvA73TMKyiBHDEVnDL2m', NULL, '2020-12-17 05:05:36', '2020-12-17 05:05:36', NULL),
+(19, 'shaikh diya', '24', 'M', 'alshak.diya@hotmail.com', '0908648033', '2020-12-17 07:50:25', '$2y$10$NV1Ry.SW4QQzRJQweeEhMuTUoqz4Ev68uDBklWeZc8oyrGNfXckxa', NULL, '2020-12-17 05:50:05', '2020-12-17 09:07:14', NULL),
+(20, 'Paula Lynch', '30', 'M', 'zoxyhi4japi@mailinator.com', '0509999999', NULL, '$2y$10$Ug7/c0nXQn2TKGh5TYMbX.v4kMKKhDuQrQMVJUNvnl4MMXNcD9heK', NULL, '2020-12-17 11:12:18', '2020-12-17 11:12:18', NULL),
+(21, 'shaikh diya aldeen', '91', 'F', 'als33hak.diya@outlook.com', '0908648033', NULL, '$2y$10$JWYc7SJL7TaLzCk0UoOlf.nZM.ShVIgLuzEvrG4Zbmd8a8kCYgvUC', NULL, '2020-12-17 11:12:41', '2020-12-17 11:12:41', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

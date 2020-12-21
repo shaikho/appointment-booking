@@ -16,29 +16,33 @@
                 <tbody>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->id }}
-                        </td>
-                        <th>
-                            {{ trans('cruds.user.fields.id') }}
-                        </th>
-                        @else
                         <th>
                             {{ trans('cruds.user.fields.id') }}
                         </th>
                         <td>
                             {{ $user->id }}
                         </td>
+
+                        @else
+                        <th>
+                            {{ trans('cruds.user.fields.id') }}
+                        </th>
+                        <td>
+                            {{ $user->id }}
+                        </td>
+
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->name }}
-                        </td>
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
+                        <td>
+                            {{ $user->name }}
+                        </td>
+
                         @else
                         <th>
                             {{ trans('cruds.user.fields.name') }}
@@ -46,34 +50,40 @@
                         <td>
                             {{ $user->name }}
                         </td>
+
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->email }}
-                        </td>
-                        <th>
-                            {{ trans('cruds.user.fields.email') }}
-                        </th>
-
-                        @else
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
                         <td>
                             {{ $user->email }}
                         </td>
+
+
+                        @else
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <td>
+                            {{ $user->email }}
+                        </td>
+
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->gender }}
-                        </td>
                         <th>
                             {{ trans('cruds.user.fields.gender') }}
                         </th>
+                        <td>
+                            {{ $user->gender }}
+                        </td>
+
 
                         @else
                         <th>
@@ -82,16 +92,19 @@
                         <td>
                             {{ $user->gender }}
                         </td>
+
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->age }}
-                        </td>
                         <th>
                             {{ trans('cruds.user.fields.age') }}
                         </th>
+                        <td>
+                            {{ $user->age }}
+                        </td>
+
 
                         @else
                         <th>
@@ -100,17 +113,20 @@
                         <td>
                             {{ $user->age }}
                         </td>
+
+
                         @endif
                     </tr>
                     @if(Session::get('role') != '2')
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $user->email_verified_at }}
-                        </td>
                         <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
+                        <td>
+                            {{ $user->email_verified_at }}
+                        </td>
+
 
                         @else
                         <th>
@@ -119,18 +135,21 @@
                         <td>
                             {{ $user->email_verified_at }}
                         </td>
+
+
                         @endif
                     </tr>
                         <tr>
                             @if(app()->getLocale() == 'ar')
+                            <th>
+                                الأدوار
+                            </th>
                             <td>
                                 @foreach($user->roles as $id => $roles)
                                     <span class="label label-info label-many">{{ $roles->title }}</span>
                                 @endforeach
                             </td>
-                            <th>
-                                Roles
-                            </th>
+
 
                             @else
                             <th>
@@ -141,15 +160,23 @@
                                     <span class="label label-info label-many">{{ $roles->title }}</span>
                                 @endforeach
                             </td>
+
+
                             @endif
                         </tr>
                     @endif
                 </tbody>
             </table>
             <div class="row">
+            @if(app()->getLocale() == 'ar')
+            <a style="margin-top:20px;margin-right:45%;margin-left:5%" class="btn btn-danger" href="{{ url()->previous() }}">
+                {{ trans('global.back') }}
+            </a>
+            @else
             <a style="margin-top:20px;margin-left:40%" class="btn btn-danger" href="{{ url()->previous() }}">
                 {{ trans('global.back') }}
             </a>
+            @endif
             @can('user_edit')
             <a style="margin-top:20px;margin-left:10%;height:10%" class="btn btn-info" href="{{ route('admin.users.edit',Session::get('user_id')) }}">
                 {{ trans('global.edit') }}
@@ -168,9 +195,15 @@
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Appointment">
             <thead>
                 <tr>
+                    @if (app()->getLocale() == 'ar')
                     <th width="10">
 
                     </th>
+                    @else
+                    <th>
+                        Acions
+                    </th>
+                    @endif
                     <th>
                         {{ trans('cruds.appointment.fields.id') }}
                     </th>
@@ -195,9 +228,15 @@
                     <th>
                         {{ trans('cruds.appointment.fields.services') }}
                     </th>
-                    <th>
-                        &nbsp;
+                    @if (app()->getLocale() == 'en')
+                    <th width="10">
+
                     </th>
+                    @else
+                    <th>
+                        العمليات
+                    </th>
+                    @endif
                 </tr>
             </thead>
         </table>

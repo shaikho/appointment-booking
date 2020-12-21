@@ -18,9 +18,16 @@
         <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-Service">
             <thead>
                 <tr>
+                    @if(app()->getLocale() == 'ar')
+                    <th>
+                        Actions
+                    </th>
+
+                    @else
                     <th width="10">
 
                     </th>
+                    @endif
                     <th>
                         {{ trans('cruds.service.fields.id') }}
                     </th>
@@ -30,9 +37,16 @@
                     {{-- <th>
                         {{ trans('cruds.service.fields.price') }}
                     </th> --}}
+                    @if(app()->getLocale() == 'ar')
                     <th>
-                        &nbsp;
+                        العمليات
                     </th>
+
+                    @else
+                    <th width="10">
+
+                    </th>
+                    @endif
                 </tr>
             </thead>
         </table>

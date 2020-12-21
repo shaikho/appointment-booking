@@ -10,6 +10,12 @@
         <form action="{{ route("admin.appointments.update", [$appointment->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
+            @if(Session::get('role') == '2')
+                <div style="visibility: hidden">
+                    <input type="text" id="client_id" name="client_id" style="visability:hidden" value={{Session::get('user_id')}}>
+                </div>
+            @else
             <div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
                 <label for="client">{{ trans('cruds.appointment.fields.client') }}*</label>
                 <select name="client_id" id="client" class="form-control select2" required>
@@ -23,6 +29,7 @@
                     </em>
                 @endif
             </div>
+            @endif
             <div class="form-group {{ $errors->has('employee_id') ? 'has-error' : '' }}">
                 <label for="employee">{{ trans('cruds.appointment.fields.employee') }}</label>
                 <select name="employee_id" id="employee" class="form-control select2">

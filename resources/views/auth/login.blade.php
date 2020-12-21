@@ -518,7 +518,7 @@
 @if (Session::has('success'))
 <script>
 var header = {!! json_encode(trans('global.emailsent')) !!};
-var message = {!! json_encode(trans('global.emailsent')) !!};
+var message = {!! json_encode(trans('global.emailsenttoverify')) !!};
 Swal.fire(
     header,
     message,

@@ -12,19 +12,21 @@
                 <tbody>
                     <tr>
                         @if(app()->getLocale('') == 'ar')
-                        <th>
-                            {{ trans('cruds.role.fields.id') }}
-                        </th>
                         <td>
                             {{ $role->id }}
                         </td>
+                        <th>
+                            {{ trans('cruds.role.fields.id') }}
+                        </th>
+
                         @else
-                        <td>
-                            {{ $role->id }}
-                        </td>
                         <th>
                             {{ trans('cruds.role.fields.id') }}
                         </th>
+                        <td>
+                            {{ $role->id }}
+                        </td>
+
                         @endif
                     </tr>
                     <tr>
@@ -53,7 +55,7 @@
                             @endforeach
                         </td>
                         <th>
-                            Permissions
+                            الصلاحيات
                         </th>
 
                         @else

@@ -12,38 +12,46 @@
                 <tbody>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $service->id }}
-                        </td>
                         <th>
                             {{ trans('cruds.service.fields.id') }}
                         </th>
+                        <td>
+                            {{ $service->id }}
+                        </td>
+
 
                         @else
                         <th>
+
                             {{ trans('cruds.service.fields.id') }}
                         </th>
                         <td>
                             {{ $service->id }}
                         </td>
+
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $service->name }}
-                        </td>
                         <th>
                             {{ trans('cruds.service.fields.name') }}
                         </th>
+                        <td>
+                            {{ $service->name }}
+                        </td>
+
 
                         @else
                         <th>
                             {{ trans('cruds.service.fields.name') }}
                         </th>
+
                         <td>
                             {{ $service->name }}
                         </td>
+
+
                         @endif
                     </tr>
                     {{-- <tr>

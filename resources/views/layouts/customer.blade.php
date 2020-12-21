@@ -32,7 +32,6 @@
             background-color:#f5d7d9;
             background-image: url({{asset("/assets/images/crisp-paper-ruffles.png")}});
         }
-
         .swal2-popup {
                 font-size: 0.9rem !important;
             }
@@ -41,7 +40,6 @@
     {{--  arabic style  --}}
     @if(app()->getLocale() == 'ar')
     <style>
-
         input::-webkit-input-placeholder {
         /* WebKit browsers */
         text-align: right;
@@ -61,42 +59,27 @@
         input::placeholder {
         text-align: right;
         }
-
         .s2class {
             text-align: right;
         }
-
         .s1class {
             text-align: right;
         }
-
         .row {
             text-align: right;
         }
-
         .page-title {
             text-align: right;
         }
-
         .card {
             text-align: right;
-            font-size: 0.9rem !important;
-            font-weight: 500;
-            direction: rtl;
         }
-
         body {
-            font-size: 0.9rem !important;
-            /* direction: rtl; */
+            font-size: 1rem !important;
         }
-
-        li {
-            font-size: 1.01rem !important;
-        }
-
         .btn {
-            font-size: 1.0rem !important;
-            font-weight:500;
+            font-size: 0.9rem !important;
+            font-weight:400;
         }
     </style>
     @endif
@@ -163,11 +146,9 @@
             let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
             let printButtonTrans = '{{ trans('global.datatables.print') }}'
             let colvisButtonTrans = '{{ trans('global.datatables.colvis') }}'
-
             let languages = {
                 'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json'
             };
-
             $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
             $.extend(true, $.fn.dataTable.defaults, {
                 language: {
@@ -241,15 +222,52 @@
                 }
                 ]
             });
-
             $.fn.dataTable.ext.classes.sPageButton = '';
             });
     </script>
+
+    @if (Session::has('disableddays') && (Session::has('holidays')))
+    <script>
+        offdays = {!!json_encode(Session::get('disableddays'))!!};
+        holidays = {!!json_encode(Session::get('holidays'))!!};
+        var array = JSON.parse(offdays);
+        $('.datetime').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: 'en',
+            sideBySide: true,
+            daysOfWeekDisabled: array,
+            disabledDates: holidays
+        })
+
+    </script>
+    @endif
+
+    @if (Session::has('holidays'))
+    <script>
+        holidays = {!!json_encode(Session::get('holidays'))!!};
+        $('.datetime').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: 'en',
+            sideBySide: true,
+            disabledDates: holidays
+        })
+    </script>
+    @endif
+
+    @if (Session::has('disableddays'))
+    <script>
+        offdays = {!!json_encode(Session::get('disableddays'))!!};
+        var array = JSON.parse(offdays);
+        $('.datetime').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: 'en',
+            sideBySide: true,
+            daysOfWeekDisabled: array
+        })
+
+    </script>
+    @endif
+
     @yield('scripts')
-    {{--  <script type="text/javascript">
-        function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-    </script>  --}}
 </body>
 </html>

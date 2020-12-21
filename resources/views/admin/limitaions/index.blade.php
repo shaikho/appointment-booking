@@ -25,6 +25,7 @@
             </thead>
             <tbody>
                 @foreach ($limitaions as $limitaion)
+                @if($limitaion->id != 4)
                 <tr>
                     <td>
                     </td>
@@ -42,7 +43,27 @@
                         @endcan
                     </td>
                 </tr>
+                @endif
                 @endforeach
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        Global holidays
+                    </td>
+                    <td>
+                        @foreach($holidays as $date)
+                        <span class="badge badge-info">{{ $date->date }}</span>
+                        @endforeach
+                    </td>
+                    <td>
+                        @can('limitations_edit')
+                            <a class="btn btn-small btn-primary" href="{{ route('admin.addglobalholidays') }}">
+                            {{ trans('global.edit') }} {{ trans('cruds.limiations.fields.limitaion') }}
+                            </a>
+                        @endcan
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

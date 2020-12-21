@@ -12,82 +12,91 @@
                 <tbody>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $employee->id }}
-                        </td>
-                        <th>
-                            {{ trans('cruds.employee.fields.id') }}
-                        </th>
-                        @else
                         <th>
                             {{ trans('cruds.employee.fields.id') }}
                         </th>
                         <td>
                             {{ $employee->id }}
                         </td>
+
+                        @else
+                        <td>
+                            {{ $employee->id }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.employee.fields.id') }}
+                        </th>
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
+                        <th>
+                            {{ trans('cruds.employee.fields.name') }}
+                        </th>
+                        <td>
+                            {{ $employee->name }}
+                        </td>
+
+                        @else
                         <td>
                             {{ $employee->name }}
                         </td>
                         <th>
                             {{ trans('cruds.employee.fields.name') }}
                         </th>
-                        @else
-                        <th>
-                            {{ trans('cruds.employee.fields.name') }}
-                        </th>
-                        <td>
-                            {{ $employee->name }}
-                        </td>
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $employee->email }}
-                        </td>
-                        <th>
-                            {{ trans('cruds.employee.fields.email') }}
-                        </th>
-                        @else
                         <th>
                             {{ trans('cruds.employee.fields.email') }}
                         </th>
                         <td>
                             {{ $employee->email }}
                         </td>
-                        @endif
-                    </tr>
-                    <tr>
-                        @if(app()->getLocale() == 'ar')
-                        <td>
-                            {{ $employee->phone }}
-                        </td>
-                        <th>
-                            {{ trans('cruds.employee.fields.phone') }}
-                        </th>
+
                         @else
+                        <td>
+                            {{ $employee->email }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.employee.fields.email') }}
+                        </th>
+
+                        @endif
+                    </tr>
+                    <tr>
+                        @if(app()->getLocale() == 'ar')
                         <th>
                             {{ trans('cruds.employee.fields.phone') }}
                         </th>
                         <td>
                             {{ $employee->phone }}
                         </td>
+
+                        @else
+                        <td>
+                            {{ $employee->phone }}
+                        </td>
+                        <th>
+                            {{ trans('cruds.employee.fields.phone') }}
+                        </th>
+
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
+                        <th>
+                            {{ trans('global.services') }}
+                        </th>
                         <td>
                             @foreach($employee->services as $id => $services)
                                 <span class="label label-info label-many">{{ $services->name }}</span>
                             @endforeach
                         </td>
-                        <th>
-                            {{ trans('global.services') }}
-                        </th>
+
 
                         @else
                         <td>
@@ -98,7 +107,10 @@
                         <th>
                             {{ trans('global.services') }}
                         </th>
+
+
                         @endif
+
                     </tr>
                 </tbody>
             </table>

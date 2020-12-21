@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Admin\RolesController as RolesController;
 use Session;
 use App;
+use App\Limitaion;
+use App\Holiday;
 
 class AuthGates
 {
@@ -29,12 +31,35 @@ class AuthGates
                 });
             }
 
-            // must make email verification check here
+            //forgetting all sessions
             Session::forget('role');
             Session::forget('user_id');
+            Session::forget('disableddays');
+
             $role = RolesController::getuserrole($user->id);
+
+            // must make email verification check here
+            //
+            //
+            //***************************************/
+
+
             Session::put('role', $role);
             Session::put('user_id',$user->id);
+
+            //checking for off days and holidays
+            $disableddays = Limitaion::find(1);
+            Session::put('disableddays',$disableddays->limit);
+
+            //checking for global holidays
+            $holidays = Holiday::All();
+            $offdates = [];
+            foreach ($holidays as $date){
+                array_push($offdates,$date->date);
+            }
+            Session::put('holidays',$offdates);
+
+            // setting app locale
             $local = Session::get('local');
             App::setLocale($local);
         }

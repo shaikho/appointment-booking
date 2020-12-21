@@ -7,20 +7,25 @@ use App\Limitaion;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Holiday;
 
 class LimitaionsController extends Controller
 {
     public function index(){
         $limitaions = Limitaion::All();
-        return view('admin.limitaions.index',compact('limitaions'));
+        $holidays = Holiday::All();
+        return view('admin.limitaions.index',compact('limitaions','holidays'));
     }
 
     public function edit($id){
         $limitaion = Limitaion::find($id);
-        return view('admin.limitaions.edit',compact('limitaion'));
+        $holidays = Holiday::All();
+        return view('admin.limitaions.edit',compact('limitaion','holidays'));
     }
 
     public function update(Request $request){
+        // return $request;
+        // dd($request);
         $workingdays = [];
         if($request->id == 1){
             $limitaion = Limitaion::find($request->id);
@@ -47,12 +52,24 @@ class LimitaionsController extends Controller
             }
             $limitaion->limit = $workingdays;
             $limitaion->save();
-        }else{
+        }else if($request->id == 4){
+            $holiday = new Holiday;
+            $holiday->date = $request->date;
+            $holiday->save();
+        }
+        else{
             $limitaion = Limitaion::find($request->id);
             $limitaion->limit = $request->limit;
             $limitaion->save();
         }
+
         $limitaions = Limitaion::All();
-        return view('admin.limitaions.index',compact('limitaions'));
+        $holidays = Holiday::All();
+
+        return view('admin.limitaions.index',compact('limitaions','holidays'));
+    }
+
+    public function addglobalholidays(){
+        return view('admin.limitaions.addglobalholidays');
     }
 }

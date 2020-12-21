@@ -19,9 +19,15 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Role">
                 <thead>
                     <tr>
+                        @if(app()->getLocale() == 'ar')
                         <th width="10">
 
                         </th>
+                        @else
+                        <th>
+                            Actions
+                        </th>
+                        @endif
                         <th>
                             {{ trans('cruds.role.fields.id') }}
                         </th>
@@ -31,9 +37,16 @@
                         <th>
                             {{ trans('cruds.role.fields.permissions') }}
                         </th>
+                        @if(app()->getLocale() == 'ar')
                         <th>
-                            &nbsp;
+                            العمليات
                         </th>
+
+                        @else
+                        <th width="10">
+
+                        </th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>

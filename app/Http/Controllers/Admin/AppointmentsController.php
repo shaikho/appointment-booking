@@ -105,7 +105,6 @@ class AppointmentsController extends Controller
             $query = Appointment::with(['client', 'employee', 'services'])
                                 ->select(sprintf('%s.*', (new Appointment)->table));
 
-
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -506,7 +505,7 @@ class AppointmentsController extends Controller
         return view('admin.appointments.create', compact('clients', 'employees', 'services'));
     }
 
-    public function store(StoreAppointmentRequest $request)
+public function store(StoreAppointmentRequest $request)
     {
         $message = 'N/A';
         //get daily limitaion
