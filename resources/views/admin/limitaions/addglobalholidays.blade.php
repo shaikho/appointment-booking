@@ -24,7 +24,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        {{ trans('global.edit') }} {{ trans('cruds.limiations.title_singular') }}
+                        {{ trans('global.delete') }} {{ trans('cruds.limiations.title_singular') }}
                     </div>
                     <div class="card-body">
                         <table id="example" class="display" style="width:100%">
