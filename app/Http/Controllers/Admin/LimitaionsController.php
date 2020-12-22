@@ -70,6 +70,16 @@ class LimitaionsController extends Controller
     }
 
     public function addglobalholidays(){
-        return view('admin.limitaions.addglobalholidays');
+        $holidays = Holiday::All();
+        // return $holidays;
+        return view('admin.limitaions.addglobalholidays',compact('holidays'));
+    }
+
+    public function deleteholiday($id){
+        $holiday = Holiday::find($id);
+        $holiday->delete();
+
+        $holidays = Holiday::All();
+        return view('admin.limitaions.addglobalholidays',compact('holidays'));
     }
 }

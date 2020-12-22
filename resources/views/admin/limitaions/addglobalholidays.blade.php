@@ -21,11 +21,48 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        {{ trans('global.edit') }} {{ trans('cruds.limiations.title_singular') }}
+                    </div>
+                    <div class="card-body">
+                        <table id="example" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Holiday date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($holidays as $holiday)
+                                <tr>
+                                    <td>{{ $holiday->id }}</td>
+                                    <td>{{ $holiday->date }}</td>
+                                    <td>
+                                        <form action="{{ route('admin.deleteholiday', $holiday->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                 </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 @endsection
 @section('scripts')
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+    </script>
 @parent
 @endsection

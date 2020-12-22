@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('addglobalholidays','LimitaionsController@addglobalholidays')->name('addglobalholidays');
     Route::post('updatelimitaions','LimitaionsController@update')->name('updatelimitaions');
     Route::put('updatelimitaions','LimitaionsController@update')->name('updatelimitaions');
+    Route::delete('deleteholiday/{id}','LimitaionsController@deleteholiday')->name('deleteholiday');
 
 });
 
