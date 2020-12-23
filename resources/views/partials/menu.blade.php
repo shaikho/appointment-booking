@@ -63,7 +63,7 @@
                     <ul class="nav-dropdown-items">
                         @can('all_appointments')
                             <li class="nav-item">
-                                <a href="{{ route("admin.allappointments") }}" class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.approvedappointments") }}" class="nav-link {{ request()->is('admin/appointments') || request()->is('admin/appointments/*') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-unlock-alt nav-icon">
 
                                     </i>

@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('draftedappointments','AppointmentsController@draftedappointments')->name('draftedappointments');
     Route::get('pendingappointments','AppointmentsController@pendingappointments')->name('pendingappointments');
     Route::get('approvedappointments','AppointmentsController@approvedappointments')->name('approvedappointments');
+    Route::get('receiptionappointments','AppointmentsController@receiptionappointments')->name('receiptionappointments');
     Route::post('submit/{id}','AppointmentsController@submit')->name('submit');
     Route::post('approve/{id}','AppointmentsController@approve')->name('approve');
     Route::get('approve/{id}','AppointmentsController@approve')->name('approve');

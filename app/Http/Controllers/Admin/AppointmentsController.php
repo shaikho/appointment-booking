@@ -103,7 +103,9 @@ class AppointmentsController extends Controller
     {
         if ($request->ajax()) {
             $query = Appointment::with(['client', 'employee', 'services'])
-                                ->select(sprintf('%s.*', (new Appointment)->table));
+                                ->select(sprintf('%s.*', (new Appointment)->table))
+                                ->where('status','=','A')
+                                ->get();
 
             $table = Datatables::of($query);
 
@@ -162,6 +164,73 @@ class AppointmentsController extends Controller
         }
 
         return view('admin.appointments.index');
+    }
+
+    public function receiptionappointments(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = Appointment::with(['client', 'employee', 'services'])
+                                ->select(sprintf('%s.*', (new Appointment)->table))
+                                ->where('status','=','A')
+                                ->get();
+
+            $table = Datatables::of($query);
+
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
+
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'appointment_show';
+                $editGate      = 'appointment_edit';
+                $deleteGate    = 'appointment_delete';
+                $approveGate   = 'approve_appointments';
+                $declineGate   = 'decline_appointments';
+                $crudRoutePart = 'appointments';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'approveGate',
+                    'declineGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->addColumn('client_name', function ($row) {
+                return $row->client ? $row->client->name : '';
+            });
+
+            $table->addColumn('employee_name', function ($row) {
+                return $row->employee ? $row->employee->name : '';
+            });
+
+            $table->editColumn('price', function ($row) {
+                return $row->price ? $row->price : "";
+            });
+            $table->editColumn('comments', function ($row) {
+                return $row->comments ? $row->comments : "";
+            });
+            $table->editColumn('services', function ($row) {
+                $labels = [];
+
+                foreach ($row->services as $service) {
+                    $labels[] = sprintf('<span class="label label-info label-many">%s</span>', $service->name);
+                }
+
+                return implode(' ', $labels);
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'client', 'employee', 'services']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.receiptionappointments');
     }
 
     public function draftedappointments(Request $request)
