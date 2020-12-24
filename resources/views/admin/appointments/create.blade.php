@@ -30,7 +30,7 @@
             @endif
             <div class="form-group {{ $errors->has('employee_id') ? 'has-error' : '' }}">
                 <label for="employee">{{ trans('cruds.appointment.fields.employee') }}</label>
-                <select name="employee_id" id="employee" class="form-control select2">
+                <select name="employee_id" id="employee" class="form-control select2" required>
                     @foreach($employees as $id => $employee)
                         <option value="{{ $id }}" {{ (isset($appointment) && $appointment->employee ? $appointment->employee->id : old('employee_id')) == $id ? 'selected' : '' }}>{{ $employee }}</option>
                     @endforeach

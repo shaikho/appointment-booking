@@ -376,7 +376,7 @@
     </style>
     @endif
 
-    <title>Document</title>
+    <title>{{ trans('global.appointment') }} - {{ trans('global.login') }}</title>
 
     </head>
     <body>

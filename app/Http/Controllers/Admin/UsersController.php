@@ -161,7 +161,7 @@ class UsersController extends Controller
 
         $user->load('roles');
 
-        $appointments = Appointment::All()->where('client_id','=',$user->id)->get();
+        // $appointments = Appointment::All()->where('client_id','=',$user->id)->get();
         $appointments = Appointment::with(['client', 'employee', 'services'])->where('client_id','=',$user->id)->get();
 
         return view('admin.users.edit', compact('roles', 'user','appointments'));

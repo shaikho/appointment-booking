@@ -88,3 +88,15 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 Route::post('adddate','LimitaionsController@adddate')->name('adddate');
+
+Route::get('sendmail',function(){
+    $details = [
+        'title' => trans('global.emailsentfrom'),
+        'image' => 0,
+        'body' => trans('global.passwordresetlinkishere').
+        'http://127.0.0.1:8000/changepassword/'
+    ];
+
+    Mail::to('alshak.diya@hotmail.com')->send(new \App\Mail\MailTest($details));
+    return "sent!";
+});
