@@ -21,6 +21,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <link href="{{ asset('assets/images/icons8-calendar-100.png') }}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     @yield('styles')
@@ -28,7 +30,7 @@
     {{--  english style  --}}
     <style>
         body {
-            font-family: 'Roboto';
+            font-family: 'Cairo' !important;
             background-color:#f5d7d9;
             background-image: url({{asset("/assets/images/crisp-paper-ruffles.png")}});
         }

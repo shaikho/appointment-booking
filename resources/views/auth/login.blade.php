@@ -8,10 +8,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <link href="{{ asset('assets/images/icons8-calendar-100.png') }}" rel="shortcut icon" type="image/x-icon" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
         <style>
+
             body {
-                background:#f5d7d9;
-                font-family: 'Roboto';
+                background:#cac7c7;
+                font-family: 'Cairo';
                 background-image:url({{asset("/assets/images/crisp-paper-ruffles.png")}});
                 }
                 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -114,7 +118,9 @@
                 color:white;
                 font-size:13px;
                 text-align:center;
-                margin-top:10px;
+                /* margin-top:10px; */
+                width:90%;
+                margin:10px;
             }
             .c2{
                 background-color:white;
@@ -130,6 +136,20 @@
                 width: 200px;
                 margin: 0 35px 20px ;
                 height: 35px;
+                padding: 6px 15px;
+                border-radius: 5px;
+                outline: none;
+                border: none;
+                background: #F6F7F9;
+                color: #748194;
+                font-size: 14px;
+            }
+
+            .username2{
+                font-weight: bold;
+                width: 200px;
+                margin: 0 35px 20px ;
+                height: 30px;
                 padding: 6px 15px;
                 border-radius: 5px;
                 outline: none;
@@ -387,24 +407,24 @@
                   <h1 class="mainhead">{{ trans('global.pick_appointment') }}</h1>
                   <p class="mainp">{{ trans('global.pick_appointment_detail') }}</p>
                </div>
-               <div id="left"><h1 class="s1class"><span>{{ trans('global.sign') }}</span><span class="su">{{ trans('global.in') }}</span>
+               <div id="left"><h1 class="s1class"><span style="margin-bottom:-20%">{{ trans('global.sign') }}</span><span class="su">{{ trans('global.in') }}</span>
                </h1></div>
-               <div id="right"><h1 class="s2class"><span>{{ trans('global.sign') }}</span><span class="su">{{ trans('global.up') }}</span></h1></div>
+               <div id="right"><h1 class="s2class"><span style="margin-bottom:-20%">{{ trans('global.sign') }}</span><span class="su">{{ trans('global.up') }}</span></h1></div>
             </div>
             <div class="c2">
                <form action="{{ route("customerregister") }}" method="POST" enctype="multipart/form-data" class="signup">
                 @csrf
                   <h1 class="signup1">{{ trans('global.signup') }}</h1>
-                     <input style="margin-left:16%" id="name" name="name" required type="text" placeholder="{{trans('global.user_name')}}*" class="username"/>
-                     <input style="margin-left:16%" id="email" name="email" type="email" required placeholder="{{ trans('global.login_email') }}*" class="username"/>
-                     <input style="margin-left:16%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="{{ trans('global.phone') }}*" class="username"/>
-                     <input style="margin-left:16%" id="password" name="password" required type="password" placeholder="{{ trans('global.login_password') }}*" class="username"/>
+                     <input style="margin-left:16%;margin-top:-2%" id="name" name="name" required type="text" placeholder="{{trans('global.user_name')}}*" class="username2"/>
+                     <input style="margin-left:16%;margin-top:-2%" id="email" name="email" type="email" required placeholder="{{ trans('global.login_email') }}*" class="username2"/>
+                     <input style="margin-left:16%;margin-top:-2%" id="phone" name="phone" pattern="^\d{10}$"  required placeholder="{{ trans('global.phone') }}*" class="username2"/>
+                     <input style="margin-left:16%;margin-top:-2%" id="password" name="password" required type="password" placeholder="{{ trans('global.login_password') }}*" class="username2"/>
                      <h1 class="signup1" style="font-size: 20px;margin-top:-2%">{{ trans('cruds.user.fields.age') }}</h1>
                      <div class="range-slider" style="margin-left:15%;margin-top:-2% ">
                         <input id="age" name="age" class="range-slider__range" type="range" value="100" min="0" max="100"/>
                         <span class="range-slider__value" style="margin-left:80%;margin-top:-7%">0</span>
                       </div>
-                     <h1 class="signup1" style="font-size: 20px">{{ trans('cruds.user.fields.gender') }}</h1>
+                     <h1 class="signup1" style="font-size: 20px;margin-top:">{{ trans('cruds.user.fields.gender') }}</h1>
                      @if(app()->getLocale() == 'ar')
                      <div class="radio" style="margin-left: 15%">
                         <input id="radio-1" name="gender" type="radio" value="M" checked>
@@ -413,15 +433,14 @@
                         <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" >  {{ trans('global.female') }}</label>
                       </div>
                       @else
-                      <div class="radio" style="margin-left: 8%">
+                      <div class="radio" style="margin-left: 8%;margin-top:-4%">
                         <input id="radio-2" name="gender" type="radio" value="F">
                         <label  for="radio-2" class="radio-label" style="color: #748194;font-weight:900" >  {{ trans('global.female') }}</label>
                         <input id="radio-1" name="gender" type="radio" value="M" checked>
                         <label for="radio-1" class="radio-label" style="color: #748194;font-weight:900" > {{ trans('global.male') }}</label>
                       </div>
                       @endif
-                      <br>
-                  <button class="btn" onclick="sendingpending()">{{ trans('global.signup') }}</button>
+                  <button class="btn" style="margin-top:7%" onclick="sendingpending()">{{ trans('global.signup') }}</button>
                   @if($errors->has('email'))
                   <div class="signup3" style="padding-bottom:5px">
                       {{ $errors->first('email') }}
@@ -437,7 +456,6 @@
                <form method="POST" action="{{ route('login') }}" class="signin">
                 {{ csrf_field() }}
                   <h1 class="signup1">{{ trans('global.signin') }}</h1>
-                  <br><br>
                   @if($errors->has('email'))
                   <div class="signup3">
                       {{ $errors->first('email') }}
@@ -452,9 +470,7 @@
                     <input style="margin-left:16%" name="email" type="text" required autofocus placeholder="{{ trans('global.login_email') }}" class="username"/>
                     <input style="margin-left:16%" name="password" required type="password" placeholder="{{ trans('global.login_password') }}" class="username"/>
                     <button class="btn">{{ trans('global.login') }}</button>
-                    <br>
                   <a href={{ route('forgotpassword') }}><p class="signup2"> {{ trans('global.forgot_password') }} </p></a>
-                  <br>
                 </form>
                 <div style="margin-left: 30%" id="localselector">
                     <a href="/setlocalar"><button class="button">ع</button></a>
