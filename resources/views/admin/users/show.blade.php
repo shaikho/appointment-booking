@@ -16,12 +16,13 @@
                 <tbody>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <th>
-                            {{ trans('cruds.user.fields.id') }}
-                        </th>
+
                         <td>
                             {{ $user->id }}
                         </td>
+                        <th>
+                            {{ trans('cruds.user.fields.id') }}
+                        </th>
 
                         @else
                         <th>
@@ -36,12 +37,13 @@
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <th>
-                            {{ trans('cruds.user.fields.name') }}
-                        </th>
+
                         <td>
                             {{ $user->name }}
                         </td>
+                        <th>
+                            {{ trans('cruds.user.fields.name') }}
+                        </th>
 
                         @else
                         <th>
@@ -56,6 +58,16 @@
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
+
+                        <td>
+                            {{ $user->email }}
+                        </td>
+
+                        <th>
+                            {{ trans('cruds.user.fields.email') }}
+                        </th>
+
+                        @else
                         <th>
                             {{ trans('cruds.user.fields.email') }}
                         </th>
@@ -64,25 +76,17 @@
                         </td>
 
 
-                        @else
-                        <th>
-                            {{ trans('cruds.user.fields.email') }}
-                        </th>
-                        <td>
-                            {{ $user->email }}
-                        </td>
-
-
                         @endif
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <th>
-                            {{ trans('cruds.user.fields.gender') }}
-                        </th>
+
                         <td>
                             {{ $user->gender }}
                         </td>
+                        <th>
+                            {{ trans('cruds.user.fields.gender') }}
+                        </th>
 
 
                         @else
@@ -98,12 +102,13 @@
                     </tr>
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <th>
-                            {{ trans('cruds.user.fields.age') }}
-                        </th>
+
                         <td>
                             {{ $user->age }}
                         </td>
+                        <th>
+                            {{ trans('cruds.user.fields.age') }}
+                        </th>
 
 
                         @else
@@ -120,12 +125,13 @@
                     @if(Session::get('role') != '2')
                     <tr>
                         @if(app()->getLocale() == 'ar')
-                        <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
-                        </th>
+
                         <td>
                             {{ $user->email_verified_at }}
                         </td>
+                        <th>
+                            {{ trans('cruds.user.fields.email_verified_at') }}
+                        </th>
 
 
                         @else
@@ -169,7 +175,7 @@
             </table>
             <div class="row">
             @if(app()->getLocale() == 'ar')
-            <a style="margin-top:20px;margin-right:45%;margin-left:5%" class="btn btn-danger" href="{{ url()->previous() }}">
+            <a style="margin-top:20px;margin-right:5%;margin-left:40%" class="btn btn-danger" href="{{ url()->previous() }}">
                 {{ trans('global.back') }}
             </a>
             @else

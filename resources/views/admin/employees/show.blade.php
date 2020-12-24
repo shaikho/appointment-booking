@@ -11,7 +11,7 @@
             <table class="table table-bordered table-striped">
                 <tbody>
                     <tr>
-                        @if(app()->getLocale() == 'ar')
+                        @if(app()->getLocale() == 'en')
                         <th>
                             {{ trans('cruds.employee.fields.id') }}
                         </th>
@@ -30,7 +30,7 @@
                         @endif
                     </tr>
                     <tr>
-                        @if(app()->getLocale() == 'ar')
+                        @if(app()->getLocale() == 'en')
                         <th>
                             {{ trans('cruds.employee.fields.name') }}
                         </th>
@@ -49,7 +49,7 @@
                         @endif
                     </tr>
                     <tr>
-                        @if(app()->getLocale() == 'ar')
+                        @if(app()->getLocale() == 'en')
                         <th>
                             {{ trans('cruds.employee.fields.email') }}
                         </th>
@@ -68,7 +68,7 @@
                         @endif
                     </tr>
                     <tr>
-                        @if(app()->getLocale() == 'ar')
+                        @if(app()->getLocale() == 'en')
                         <th>
                             {{ trans('cruds.employee.fields.phone') }}
                         </th>
@@ -87,7 +87,7 @@
                         @endif
                     </tr>
                     <tr>
-                        @if(app()->getLocale() == 'ar')
+                        @if(app()->getLocale() == 'en')
                         <th>
                             {{ trans('global.services') }}
                         </th>

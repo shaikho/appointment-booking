@@ -56,7 +56,7 @@
                             &nbsp;
                         </th>
 
-                        
+
                     @else
                         <th width="10">
                         العمليات
