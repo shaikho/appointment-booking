@@ -16,6 +16,7 @@
     </form>
 @endcan
 @can($approveGate)
+<br><br>
     <form action="{{ route('admin.approve', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
         <input type="hidden" name="_method" value="POST">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -29,8 +30,8 @@
         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.decline') }}">
     </form>
 @endcan
-<br><br>
 @if(Session::get('role') == '2')
+<br><br>
 @can($submitGate)
     <form action="{{ route('admin.submit', $row->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
         <input type="hidden" name="_method" value="POST">

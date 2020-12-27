@@ -341,7 +341,7 @@ class AppointmentsController extends Controller
                 $declineGate   = 'decline_appointments';
                 $crudRoutePart = 'appointments';
 
-                return view('partials.datatablesActions', compact(
+                return view('partials.datatablesAppointmentsActions', compact(
                     'viewGate',
                     'editGate',
                     'deleteGate',

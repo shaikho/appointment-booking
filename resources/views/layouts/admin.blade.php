@@ -26,7 +26,7 @@
     {{--  arabic style  --}}
     @if(app()->getLocale() == 'ar')
     <style>
-
+        
         input::-webkit-input-placeholder {
         /* WebKit browsers */
         text-align: right;
